@@ -50,6 +50,16 @@ python -m nltk.downloader words
 ```python
 from pyresparser import ResumeParser
 data = ResumeParser('/path/to/resume/file').get_extracted_data()
+For File:
+      python resume.py --filepath <filepath of Resume Complete> --excel <Excel Filename>
+
+      E.g - python resume.py --filepath Resume/OmkarResume.docx --excel Omkar.xlsx
+
+For Directory:
+
+      python resume.py --directory <Directory Name> --excel <Excel Filename>
+
+      E.g - python resume.py --directory Resume --excel Resume.xlsx
 ```
 
 # Notes:
@@ -58,39 +68,8 @@ data = ResumeParser('/path/to/resume/file').get_extracted_data()
 
 # Result
 
-The module would return a list of dictionary objects with result as follows:
+The module would return a Excel File
 
-```
-[
-  {
-    'college_name': ['Marathwada Mitra Mandal’s College of Engineering'],
-    'company_names': None,
-    'degree': ['B.E. IN COMPUTER ENGINEERING'],
-    'designation': ['Manager',
-                    'TECHNICAL CONTENT WRITER',
-                    'DATA ENGINEER'],
-    'email': 'omkarpathak27@gmail.com',
-    'mobile_number': '8087996634',
-    'name': 'Omkar Pathak',
-    'no_of_pages': 3,
-    'skills': ['Operating systems',
-              'Linux',
-              'Github',
-              'Testing',
-              'Content',
-              'Automation',
-              'Python',
-              'Css',
-              'Website',
-              'Django',
-              'Opencv',
-              'Programming',
-              'C',
-              ...],
-    'total_experience': 1.83
-  }
-]
-```
 
 # References that helped me get here
 

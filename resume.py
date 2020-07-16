@@ -11,7 +11,7 @@ from pyresparser import ResumeParser                              #call to resum
 #Argument Parser
 def Argument_Parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--filepath',help='path to resume file')
+    parser.add_argument('--filepath',help='path to resume file')                                  #Taking arguments
     parser.add_argument('--directory',help="directory containing all the resumes to be extracted")
     parser.add_argument('--excel',required=True,help='Excel Filename')
     args = parser.parse_args()
@@ -41,9 +41,8 @@ if FileName:                                                     #If User Enters
 
     try:
         Resume_Data = ResumeParser(FileName).get_extracted_data()
-        for key in Resume_Data:
-            if (key=="skills"):
-                key.replace("skills","Top Skills")
+        Resume_Data['skills'] = Resume_Data['Top skills']
+        del Resume_Data['skills']
         Resume_Dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')       #DataFrame from Dict
         Resume_Dataframe = Resume_Dataframe.transpose()                              #Transpose
     except:
@@ -65,12 +64,15 @@ if Directory_Name:                                                              
             return FileName
 
         FileName = Document_to_pdf(i)
-        try:
-            Resume_Data = ResumeParser(FileName).get_extracted_data()                           #call to resume_parser file in pyresparser
+        a =1
+        if(a==1):
+            Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser   
+            Resume_Data['Top skills'] = Resume_Data['skills']
+            del Resume_Data['skills']                                                                             #Renaming Skill to top_skill
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
             Resume_dataframe = Resume_dataframe.transpose()
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                        #appending all resumedataframe into main
-        except:
+        else:
             print("Enter Correct Directory")
 
 def main():                                                                                     #main function to write to excel
