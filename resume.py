@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from pyresparser import ResumeParser
 import argparse
 import subprocess
 import time
 import pandas as pd
 import pandas as pd
 import os
+from pyresparser import ResumeParser                              #call to resume_parser file from pyresparser folder
+
 
 #Argument Parser
 def Argument_Parser():
@@ -26,8 +27,8 @@ FileName = argument_list[0]                                      #FileName_Argum
 Excel_Filename = argument_list[1]                                #Excel_Argument
 Directory_Name = argument_list[2]                                #Directory_Argument
 
-if FileName:                                                    #If User Enters file
-    def Document_to_pdf(FileName):                              #doc and docx converter to pdf
+if FileName:                                                     #If User Enters file
+    def Document_to_pdf(FileName):                               #doc and docx converter to pdf
         if FileName.endswith('.doc') or FileName.endswith('.docx'):
             subprocess.call(['soffice', '--headless', '--convert-to', 'pdf', FileName])
             time.sleep(4)
@@ -45,15 +46,12 @@ if FileName:                                                    #If User Enters 
                 key.replace("skills","Top Skills")
         Resume_Dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')       #DataFrame from Dict
         Resume_Dataframe = Resume_Dataframe.transpose()                              #Transpose
-        writer = pd.ExcelWriter(Excel_Filename, engine='xlsxwriter')
-        Resume_Dataframe.to_excel(writer, sheet_name='Sheet1')
-        writer.save()
     except:
         print("Enter Correct Path")
 
 
-if Directory_Name:                                                              #If User Enters Directory
-    Resumes_Dataframe = pd.DataFrame()
+if Directory_Name:                                                                   #If User Enters Directory
+    Resume_Dataframe = pd.DataFrame()
     files = os.listdir(Directory_Name)
     for i in files:
         i = Directory_Name + "/" + i
@@ -67,20 +65,21 @@ if Directory_Name:                                                              
             return FileName
 
         FileName = Document_to_pdf(i)
-
         try:
-            Resume_Data = ResumeParser(FileName).get_extracted_data()
-            for key in Resume_Data:
-                if (key=="skills"):
-                    key.replace("skills","Top Skills")
-            Resume_Dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
-            Resume_Dataframe = Resume_Dataframe.transpose()
-            Resumes_Dataframe = Resumes_Dataframe.append(Resume_Dataframe)                     #appending all resumedataframe into main
+            Resume_Data = ResumeParser(FileName).get_extracted_data()                           #call to resume_parser file in pyresparser
+            Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
+            Resume_dataframe = Resume_dataframe.transpose()
+            Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                        #appending all resumedataframe into main
         except:
             print("Enter Correct Directory")
+
+def main():                                                                                     #main function to write to excel
     writer = pd.ExcelWriter(Excel_Filename, engine='xlsxwriter')                                #write to excel
-    Resumes_Dataframe.to_excel(writer, sheet_name='Sheet1')
+    Resume_Dataframe.to_excel(writer, sheet_name='Sheet1')
     writer.save()
+
+if __name__ == "__main__":
+    main()
     
 
                

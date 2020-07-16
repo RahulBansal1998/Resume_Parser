@@ -400,9 +400,6 @@ def extract_skills(nlp_text, noun_chunks, skills_file=None):
         Skill_List.append(key)
 
     return Skill_List
-           
-    
-
 
 def cleanup(token, lower=True):
     if lower:

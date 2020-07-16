@@ -38,15 +38,10 @@ python -m spacy download en_core_web_sm
 python -m nltk.downloader words
 ```
 
-# Documentation
-
-Official documentation is available at: https://www.omkarpathak.in/pyresparser/
-
 # Supported File Formats
 
-- PDF and DOCx files are supported on all Operating Systems
-- If you want to extract DOC files you can install [textract](https://textract.readthedocs.io/en/stable/installation.html) for your OS (Linux, MacOS)
-- Note: You just have to install textract (and nothing else) and doc files will get parsed easily
+- PDF and DOCx and Doc files are supported on all Operating Systems
+
 
 # Usage
 
@@ -105,5 +100,4 @@ The module would return a list of dictionary objects with result as follows:
 
 - [https://www.analyticsvidhya.com/blog/2017/04/natural-language-processing-made-easy-using-spacy-%E2%80%8Bin-python/](https://www.analyticsvidhya.com/blog/2017/04/natural-language-processing-made-easy-using-spacy-%E2%80%8Bin-python/)
 
-- **Special thanks** to dataturks for their [annotated dataset](https://dataturks.com/blog/named-entity-recognition-in-resumes.php)
 
