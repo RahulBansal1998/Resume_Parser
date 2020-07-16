@@ -385,18 +385,21 @@ def extract_skills(nlp_text, noun_chunks, skills_file=None):
             skillset.append(token)
     lis =  [i.capitalize() for i in ([i.lower() for i in skillset])]
     
-    Dict = {}
+    Dict = {}                                                                           #creating dict to find max skill
 
-    for item in lis:
+    for item in lis:                                                                    # Dict calculating occurence                                                             
         if (item in Dict):
             Dict[item]+=1
         else:
             Dict[item] = 1
 
-    Dict = dict(sorted(Dict.items(), key = lambda d:(d[1], d[0]),reverse=True))
+    Dict = dict(sorted(Dict.items(), key = lambda d:(d[1], d[0]),reverse=True))         #Soring Dict
     Dict = dict(itertools.islice(Dict.items(), 5))
-    print(Dict)
-    return Dict
+    Skill_List = []
+    for key in Dict.keys():
+        Skill_List.append(key)
+
+    return Skill_List
            
     
 

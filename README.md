@@ -4,7 +4,7 @@
 A simple resume parser used for extracting information from resumes
 ```
 
-Built w//////////////////////////////////////////////////////////////////////////ith ❤︎ and :coffee: by  [Omkar Pathak](https://github.com/OmkarPathak)
+Built with ❤︎ and coffee
 
 
 
@@ -107,13 +107,3 @@ The module would return a list of dictionary objects with result as follows:
 
 - **Special thanks** to dataturks for their [annotated dataset](https://dataturks.com/blog/named-entity-recognition-in-resumes.php)
 
-# Donation
-
-If you have found my softwares to be of any use to you, do consider helping me pay my internet bills. This would encourage me to create many such softwares :smile:
-
-| PayPal | <a href="https://paypal.me/omkarpathak27" target="_blank"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" alt="Donate via PayPal!" title="Donate via PayPal!" /></a> |
-|:-------------------------------------------:|:-------------------------------------------------------------:|
-| ₹ (INR)  | <a href="https://www.instamojo.com/@omkarpathak/" target="_blank"><img src="https://www.soldermall.com/images/pic-online-payment.jpg" alt="Donate via Instamojo" title="Donate via instamojo" /></a> |
-
-# Stargazer over time
-[![Stargazers over time](https://starchart.cc/OmkarPathak/pyresparser.svg)](https://starchart.cc/OmkarPathak/pyresparser)
