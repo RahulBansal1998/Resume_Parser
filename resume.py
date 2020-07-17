@@ -40,9 +40,9 @@ if FileName:                                                     #If User Enters
     FileName = Document_to_pdf(FileName)  
 
     try:
-        Resume_Data = ResumeParser(FileName).get_extracted_data()
-        Resume_Data['skills'] = Resume_Data['Top skills']
-        del Resume_Data['skills']
+        Resume_Data = ResumeParser(FileName).get_extracted_data()            
+        Resume_Data['Top skills'] = Resume_Data['skills']
+        del Resume_Data['skills']  
         Resume_Dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')       #DataFrame from Dict
         Resume_Dataframe = Resume_Dataframe.transpose()                              #Transpose
     except:
@@ -64,15 +64,14 @@ if Directory_Name:                                                              
             return FileName
 
         FileName = Document_to_pdf(i)
-        a =1
-        if(a==1):
+        try:
             Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser   
             Resume_Data['Top skills'] = Resume_Data['skills']
             del Resume_Data['skills']                                                                             #Renaming Skill to top_skill
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
             Resume_dataframe = Resume_dataframe.transpose()
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                        #appending all resumedataframe into main
-        else:
+        except:
             print("Enter Correct Directory")
 
 def main():                                                                                     #main function to write to excel
