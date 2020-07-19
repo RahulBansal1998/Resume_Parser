@@ -3,8 +3,8 @@ import argparse
 import subprocess
 import time
 import pandas as pd
-import pandas as pd
 import os
+import xlsxwriter
 from pyresparser import ResumeParser                              #call to resume_parser file from pyresparser folder
 
 
@@ -64,6 +64,7 @@ if Directory_Name:                                                              
             return FileName
 
         FileName = Document_to_pdf(i)
+
         try:
             Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser   
             Resume_Data['Top skills'] = Resume_Data['skills']

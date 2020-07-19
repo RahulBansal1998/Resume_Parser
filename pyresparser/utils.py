@@ -345,6 +345,7 @@ def extract_mobile_number(text, custom_regex=None):
     #     [2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{7})
     #     (?:\s*(?:#|x\.?|ext\.?|
     #     extension)\s*(\d+))?'''
+    mob_regex = r"\+?\d[\d -]{8,12}\d"
     if not custom_regex:
         mob_num_regex = r'''(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)
                         [-\.\s]*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})'''
@@ -353,6 +354,9 @@ def extract_mobile_number(text, custom_regex=None):
         phone = re.findall(re.compile(custom_regex), text)
     if phone:
         number = ''.join(phone[0].split())
+        if len(number) < 10:
+            number = re.findall(re.compile(mob_regex),text)
+            number = ''.join(number[0].split())
         return number
 
 
