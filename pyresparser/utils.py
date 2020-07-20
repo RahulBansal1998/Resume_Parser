@@ -315,7 +315,8 @@ def extract_email(text):
 
 
 def extract_name(nlp_text, matcher):
-    
+
+
     pattern = [cs.NAME_PATTERN]
 
     matcher.add('NAME', None, *pattern)

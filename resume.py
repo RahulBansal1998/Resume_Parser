@@ -64,20 +64,27 @@ if Directory_Name:                                                              
             return FileName
 
         FileName = Document_to_pdf(i)
-
-        try:
+        a =1 
+        if(a==1):
             Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser   
             Resume_Data['Top skills'] = Resume_Data['skills']
             del Resume_Data['skills']                                                                             #Renaming Skill to top_skill
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
             Resume_dataframe = Resume_dataframe.transpose()
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                        #appending all resumedataframe into main
-        except:
+     
+        else:
             print("Enter Correct Directory")
 
 def main():                                                                                     #main function to write to excel
-    writer = pd.ExcelWriter(Excel_Filename, engine='xlsxwriter')                                #write to excel
+    writer = pd.ExcelWriter(Excel_Filename, engine='xlsxwriter')                                #write to excel    
     Resume_Dataframe.to_excel(writer, sheet_name='Sheet1')
+    workbook_object = writer.book
+    worksheet_object  = writer.sheets['Sheet1'] 
+    format_object1 = workbook_object.add_format({'text_wrap': True}) 
+    worksheet_object.set_column('B:D', 27) 
+    worksheet_object.set_column('F:I', 33,format_object1)
+    worksheet_object.set_column('K:L', 33,format_object1) 
     writer.save()
 
 if __name__ == "__main__":
