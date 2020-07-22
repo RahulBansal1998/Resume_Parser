@@ -1,4 +1,3 @@
-# Author: Omkar Pathak
 
 import os
 import multiprocessing as mp
@@ -33,6 +32,7 @@ class ResumeParser(object):
             'experience': None,
             'company_names': None,
             'total_experience': None,
+            
         }
         self.__resume = resume
         if not isinstance(self.__resume, io.BytesIO):
@@ -74,7 +74,7 @@ class ResumeParser(object):
 
         # extract name
         try:
-            self.__details['name'] = cust_ent['Name'][0]
+            self.__details['name'] = cust_ent['Name']
         except (IndexError, KeyError):
             self.__details['name'] = name
 

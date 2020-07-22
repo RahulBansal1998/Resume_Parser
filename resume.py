@@ -5,15 +5,15 @@ import time
 import pandas as pd
 import os
 import xlsxwriter
-from pyresparser import ResumeParser                              #call to resume_parser file from pyresparser folder
+from pyresparser import ResumeParser                                                                    #call to resume_parser file from pyresparser folder
 
 
 #Argument Parser
 def Argument_Parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--filepath',help='path to resume file')                                  #Taking arguments
-    parser.add_argument('--directory',help="directory containing all the resumes to be extracted")
-    parser.add_argument('--excel',required=True,help='Excel Filename')
+    parser.add_argument('--filepath',help='path to resume file')                                        #Taking arguments
+    parser.add_argument('--directory',help="directory containing all the resumes to be extracted")      #Taking arguments
+    parser.add_argument('--excel',required=True,help='Excel Filename')                                  #Taking arguments
     args = parser.parse_args()
     FileName = args.filepath
     Excel_Filename = args.excel 
@@ -22,13 +22,13 @@ def Argument_Parser():
     return Argument_list
 
 
-argument_list = Argument_Parser()                                #Argument_List
-FileName = argument_list[0]                                      #FileName_Argument
-Excel_Filename = argument_list[1]                                #Excel_Argument
-Directory_Name = argument_list[2]                                #Directory_Argument
+argument_list = Argument_Parser()                                                                        #Argument_List
+FileName = argument_list[0]                                                                              #FileName_Argument
+Excel_Filename = argument_list[1]                                                                        #Excel_Argument
+Directory_Name = argument_list[2]                                                                        #Directory_Argument
 
-if FileName:                                                     #If User Enters file
-    def Document_to_pdf(FileName):                               #doc and docx converter to pdf
+if FileName:                                                                                             #If User Enters file
+    def Document_to_pdf(FileName):                                                                       #doc and docx converter to pdf
         if FileName.endswith('.doc') or FileName.endswith('.docx'):
             subprocess.call(['soffice', '--headless', '--convert-to', 'pdf', FileName])
             time.sleep(4)
@@ -38,18 +38,18 @@ if FileName:                                                     #If User Enters
         return FileName
 
     FileName = Document_to_pdf(FileName)  
-
+ 
     try:
         Resume_Data = ResumeParser(FileName).get_extracted_data()            
         Resume_Data['Top skills'] = Resume_Data['skills']
         del Resume_Data['skills']  
-        Resume_Dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')       #DataFrame from Dict
-        Resume_Dataframe = Resume_Dataframe.transpose()                              #Transpose
+        Resume_Dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')                            #DataFrame from Dict
+        Resume_Dataframe = Resume_Dataframe.transpose()                                                   #Transpose of dataframe
     except:
         print("Enter Correct Path")
 
 
-if Directory_Name:                                                                   #If User Enters Directory
+if Directory_Name:                                                                                        #If User Enters Directory
     Resume_Dataframe = pd.DataFrame()
     files = os.listdir(Directory_Name)
     for i in files:
@@ -64,16 +64,15 @@ if Directory_Name:                                                              
             return FileName
 
         FileName = Document_to_pdf(i)
-        a =1 
-        if(a==1):
-            Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser   
+        try:
+            Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser  
             Resume_Data['Top skills'] = Resume_Data['skills']
-            del Resume_Data['skills']                                                                             #Renaming Skill to top_skill
+            del Resume_Data['skills']                                                                            #Renaming Skill to top_skill
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
             Resume_dataframe = Resume_dataframe.transpose()
-            Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                        #appending all resumedataframe into main
+            Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
      
-        else:
+        except:
             print("Enter Correct Directory")
 
 def main():                                                                                     #main function to write to excel
@@ -81,8 +80,8 @@ def main():                                                                     
     Resume_Dataframe.to_excel(writer, sheet_name='Sheet1')
     workbook_object = writer.book
     worksheet_object  = writer.sheets['Sheet1'] 
-    format_object1 = workbook_object.add_format({'text_wrap': True}) 
-    worksheet_object.set_column('B:D', 27) 
+    format_object1 = workbook_object.add_format({'text_wrap': True,'valign': 'top'})            #added Text Wrap
+    worksheet_object.set_column('B:D', 25)                                                      #setting column width
     worksheet_object.set_column('F:I', 33,format_object1)
     worksheet_object.set_column('K:L', 33,format_object1) 
     writer.save()

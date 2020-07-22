@@ -199,6 +199,7 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     trained model using SpaCy's NER
 
     :param custom_nlp_text: object of `spacy.tokens.doc.Doc`
+
     :return: dictionary of entities
     '''
     entities = {}
@@ -209,6 +210,19 @@ def extract_entities_wih_custom_model(custom_nlp_text):
             entities[ent.label_].append(ent.text)
     for key in entities.keys():
         entities[key] = list(set(entities[key]))
+    
+    entities = {k: ",".join(v) for k,v in entities.items()}           
+    entities = {k: v.rstrip("\n") for k,v in entities.items()}   
+    entities =  {k: v.replace("Bachelor of Technology","B.Tech") for k,v in entities.items()}          
+    entities =  {k: v.replace("B-Tech","B.Tech") for k,v in entities.items()}          
+    entities =  {k: v.replace("B. Tech","B.Tech") for k,v in entities.items()}          
+    entities =  {k: v.replace("BTech","B.Tech") for k,v in entities.items()}        
+    entities =  {k: v.replace("btech","B.Tech") for k,v in entities.items()}         
+    entities =  {k: v.replace("Btech","B.Tech") for k,v in entities.items()}         
+    entities =  {k: v.replace("bTech","B.Tech") for k,v in entities.items()}         
+    entities =  {k: v.replace("b.tech","B.Tech") for k,v in entities.items()}         
+    entities =  {k: v.replace("b.Tech","B.Tech") for k,v in entities.items()}    
+    entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}         
     return entities
 
 
@@ -309,6 +323,8 @@ def extract_email(text):
             email = email.replace("email:","")
             email = email.replace("e-mail:","")
             email = email.replace("|mobile:","")
+            email = email.replace("mobile:","")
+
             return email
         except IndexError:
             return None
@@ -358,6 +374,12 @@ def extract_mobile_number(text, custom_regex=None):
         if len(number) < 10:
             number = re.findall(re.compile(mob_regex),text)
             number = ''.join(number[0].split())
+        if len(number) > 10:
+            number = number.replace("+","")
+            number = number.replace("+91","")
+            number = number.replace("+91-","")
+            number = number.replace("91-","")
+            number = number.replace("-","")
         return number
 
 
@@ -403,8 +425,13 @@ def extract_skills(nlp_text, noun_chunks, skills_file=None):
     Skill_List = []
     for key in Dict.keys():
         Skill_List.append(key)
+    
+    Skill_String = ""
 
-    return Skill_List
+    for element in Skill_List:
+        Skill_String =  element + "," + Skill_String
+    Skill_String = Skill_String[:-1]
+    return Skill_String
 
 def cleanup(token, lower=True):
     if lower:
