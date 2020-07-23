@@ -190,6 +190,7 @@ def extract_entity_sections_grad(text):
     # for entity in cs.RESUME_SECTIONS:
     #     if entity not in entities.keys():
     #         entities[entity] = None
+    # print(entities)
     return entities
 
 
@@ -222,7 +223,9 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     entities =  {k: v.replace("bTech","B.Tech") for k,v in entities.items()}         
     entities =  {k: v.replace("b.tech","B.Tech") for k,v in entities.items()}         
     entities =  {k: v.replace("b.Tech","B.Tech") for k,v in entities.items()}    
-    entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}         
+    entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}    
+    entities =  {k: v.replace("INSTITUTE OF ENGINEERING & \nTECHNOLOGY","KRISHNA INSTITUTE OF ENGINEERING & TECHNOLOGY") for k,v in entities.items()}    
+    
     return entities
 
 
@@ -439,34 +442,34 @@ def cleanup(token, lower=True):
     return token.strip()
 
 
-def extract_education(nlp_text):
-    '''
-    Helper function to extract education from spacy nlp text
+# def extract_education(nlp_text):
+#     '''
+#     Helper function to extract education from spacy nlp text
 
-    :param nlp_text: object of `spacy.tokens.doc.Doc`
-    :return: tuple of education degree and year if year if found
-             else only returns education degree
-    '''
-    edu = {}
-    # Extract education degree
-    try:
-        for index, text in enumerate(nlp_text):
-            for tex in text.split():
-                tex = re.sub(r'[?|$|.|!|,]', r'', tex)
-                if tex.upper() in cs.EDUCATION and tex not in cs.STOPWORDS:
-                    edu[tex] = text + nlp_text[index + 1]
-    except IndexError:
-        pass
+#     :param nlp_text: object of `spacy.tokens.doc.Doc`
+#     :return: tuple of education degree and year if year if found
+#              else only returns education degree
+#     '''
+#     edu = {}
+#     # Extract education degree
+#     try:
+#         for index, text in enumerate(nlp_text):
+#             for tex in text.split():
+#                 tex = re.sub(r'[?|$|.|!|,]', r'', tex)
+#                 if tex.upper() in cs.EDUCATION and tex not in cs.STOPWORDS:
+#                     edu[tex] = text + nlp_text[index + 1]
+#     except IndexError:
+#         pass
 
-    # Extract year
-    education = []
-    for key in edu.keys():
-        year = re.search(re.compile(cs.YEAR), edu[key])
-        if year:
-            education.append((key, ''.join(year.group(0))))
-        else:
-            education.append(key)
-    return education
+#     # Extract year
+#     education = []
+#     for key in edu.keys():
+#         year = re.search(re.compile(cs.YEAR), edu[key])
+#         if year:
+#             education.append((key, ''.join(year.group(0))))
+#         else:
+#             education.append(key)
+#     return education
 
 
 def extract_experience(resume_text):

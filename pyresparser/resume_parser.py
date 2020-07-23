@@ -16,7 +16,7 @@ class ResumeParser(object):
         skills_file=None,
         custom_regex=None
     ):
-        nlp = spacy.load('en_core_web_sm')
+        nlp = spacy.load('en_core_web_lg')
         custom_nlp = spacy.load(os.path.dirname(os.path.abspath(__file__)))
         self.__skills_file = skills_file
         self.__custom_regex = custom_regex
@@ -89,7 +89,7 @@ class ResumeParser(object):
 
         # extract college name
         try:
-            self.__details['college_name'] = entities['College Name']
+            self.__details['college_name'] = cust_ent['College Name']
         except KeyError:
             pass
 

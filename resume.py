@@ -81,7 +81,7 @@ def main():                                                                     
     workbook_object = writer.book
     worksheet_object  = writer.sheets['Sheet1'] 
     format_object1 = workbook_object.add_format({'text_wrap': True,'valign': 'top'})            #added Text Wrap
-    worksheet_object.set_column('B:D', 25)                                                      #setting column width
+    worksheet_object.set_column('B:E', 25)                                                      #setting column width
     worksheet_object.set_column('F:I', 33,format_object1)
     worksheet_object.set_column('K:L', 33,format_object1) 
     writer.save()
