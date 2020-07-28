@@ -68,7 +68,7 @@ class ResumeParser(object):
         name = utils.extract_name(self.__nlp, matcher=self.__matcher)
         email = utils.extract_email(self.__text)
         mobile = utils.extract_mobile_number(self.__text, self.__custom_regex)
-        # eduu = utils.extract_education(self.__nlp,self.__text)
+        experiences = utils.extracts_experience(self.__text)
         skills = utils.extract_skills(
                     self.__nlp,
                     self.__noun_chunks,
@@ -114,25 +114,25 @@ class ResumeParser(object):
             self.__details['designation'] = cust_ent['Designation']
         except KeyError:
             pass
+        #extract Total Experience
+        try:
+            self.__details['total_experience'] = experiences                  
+        except KeyError:
+            pass
+            # exp = round(utils.get_total_experience(entities['experience']) / 12,2)
+            # self.__details['total_experience'] = exp
+
 
         # extract company names
         try:
             self.__details['company_names'] = cust_ent['Companies worked at']
         except KeyError:
             pass
-
+        #Extract Experience
         try:
             self.__details['experience'] = entities['experience']
-            try:
-                self.__details['total_experience'] = cust_ent['Years of Experience']      
-            except KeyError:
-                exp = round(
-                    utils.get_total_experience(entities['experience']) / 12,
-                    2
-                )
-                self.__details['total_experience'] = str(exp) + "Years"
-        except KeyError:
-            self.__details['total_experience'] = str(0) + "Years"
+        except:
+            pass
  
         return
 

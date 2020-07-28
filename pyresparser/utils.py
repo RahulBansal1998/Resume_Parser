@@ -237,6 +237,7 @@ def get_total_experience(experience_list):
     :param experience_list: list of experience text extracted
     :return: total months of experience
     '''
+ 
     exp_ = []
     for line in experience_list:
         experience = re.search(
@@ -250,6 +251,7 @@ def get_total_experience(experience_list):
         [get_number_of_months_from_dates(i[0], i[2]) for i in exp_]
     )
     total_experience_in_months = total_exp
+    print ("tt",total_experience_in_months)
     return total_experience_in_months
 
 
@@ -449,7 +451,6 @@ def extract_college(nlp_text,noun_chunks):
     :return: string of college Name
     '''
     tokens = [token.text for token in nlp_text if not token.is_stop]
-    # print(tokens)
     
     with open('pyresparser/College.csv') as f1:
         reader = csv.reader(f1)
@@ -484,27 +485,38 @@ def cleanup(token, lower=True):
         token = token.lower()
     return token.strip()
 
+def extracts_experience(text):
+    '''
+    text simple plan text in simple form
+    uses regex to extract text
+    '''
+    text = text.lower()
+    pattern = r"\d+\s+years?\s+(?:and\s*)?\d+\s+months?|\d+\s+(?:months?|years?)"
+    experience = re.findall(pattern, text)
+    if experience:
+        experience = str(experience[0])    
+    else:
+        experience = ' '.join([str(elem) for elem in experience])
+    return experience
+        
 
-def extract_education(nlp_text,text):
+def extract_education(text):
     '''
     Helper function to extract education from spacy nlp text
 
-    :param nlp_text: object of `spacy.tokens.doc.Doc`
+    :param text: object of `spacy.tokens.doc.Doc`
     :return: tuple of education degree and year if year if found
              else only returns education degree
     '''
     edu = {}
-    print (nlp_text)
     # Extract education degree
-    # regeex = r"\\d+\\s+(?:months?|years?)"
-    # experience = re.findall(regeex, nlp_text)
-    # print (experience)
+
     try:
-        for index, text in enumerate(nlp_text):
+        for index, text in enumerate(text):
             for tex in text.split():
                 tex = re.sub(r'[?|$|.|!|,]', r'', tex)
                 if tex.upper() in cs.EDUCATION and tex not in cs.STOPWORDS:
-                    edu[tex] = text + nlp_text[index + 1]
+                    edu[tex] = text + text[index + 1]
     except IndexError:
         pass
 
@@ -516,7 +528,7 @@ def extract_education(nlp_text,text):
             education.append((key, ''.join(year.group(0))))
         else:
             education.append(key)
-    print (education)
+    # print (education)
     return education
 
 
