@@ -9,6 +9,7 @@ from . import utils
 
 
 class ResumeParser(object):
+    ''' Main class to define all entity global variable'''             
 
     def __init__(
         self,
@@ -21,17 +22,21 @@ class ResumeParser(object):
         self.__skills_file = skills_file
         self.__custom_regex = custom_regex
         self.__matcher = Matcher(nlp.vocab)
-        self.__details = {
+        self.__details = {       
+            #entities 
             'name': None,
-            'email': None,
+            'Email': None,
             'mobile_number': None,
             'skills': None,
-            'college_name': None,
+            'Institute_name': None,
             'degree': None,
             'designation': None,
             'experience': None,
             'company_names': None,
             'total_experience': None,
+            
+
+
             
         }
         self.__resume = resume
@@ -39,14 +44,14 @@ class ResumeParser(object):
             ext = os.path.splitext(self.__resume)[1].split('.')[1]
         else:
             ext = self.__resume.name.split('.')[1]
-        self.__text_raw = utils.extract_text(self.__resume, '.' + ext)
+        self.__text_raw = utils.extract_text(self.__resume, '.' + ext)  #raw text extracting from utils.py file by calling utils
         self.__text = ' '.join(self.__text_raw.split())
         self.__nlp = nlp(self.__text)
         self.__custom_nlp = custom_nlp(self.__text_raw)
         self.__noun_chunks = list(self.__nlp.noun_chunks)
         self.__get_basic_details()
 
-    def get_extracted_data(self):
+    def get_extracted_data(self):   #function calling from resume.py file
         return self.__details
     
     def get_extracted_text(self):
@@ -56,20 +61,24 @@ class ResumeParser(object):
 
 
     def __get_basic_details(self):
+        '''function to collect all basic details'''
         cust_ent = utils.extract_entities_wih_custom_model(
                             self.__custom_nlp
                         )
         name = utils.extract_name(self.__nlp, matcher=self.__matcher)
         email = utils.extract_email(self.__text)
         mobile = utils.extract_mobile_number(self.__text, self.__custom_regex)
+        # eduu = utils.extract_education(self.__nlp,self.__text)
         skills = utils.extract_skills(
                     self.__nlp,
                     self.__noun_chunks,
                     self.__skills_file
                 )
-        # edu = utils.extract_education(
-        #               [sent.string.strip() for sent in self.__nlp.sents]
-        #       )
+        college = utils.extract_college(
+                    self.__nlp,
+                    self.__noun_chunks
+                )
+
         entities = utils.extract_entity_sections_grad(self.__text_raw)
 
         # extract name
@@ -78,8 +87,8 @@ class ResumeParser(object):
         except (IndexError, KeyError):
             self.__details['name'] = name
 
-        # extract email
-        self.__details['email'] = email
+        # extract Email
+        self.__details['Email'] = email
 
         # extract mobile number
         self.__details['mobile_number'] = mobile
@@ -87,11 +96,12 @@ class ResumeParser(object):
         # extract skills
         self.__details['skills'] = skills
 
-        # extract college name
+        #extract_colllege_name
         try:
-            self.__details['college_name'] = cust_ent['College Name']
-        except KeyError:
-            pass
+            self.__details['Institute_name'] = cust_ent['College Name']
+        except (IndexError, KeyError):
+            self.__details['Institute_name'] = college
+     
 
         # extract education Degree
         try:
@@ -114,16 +124,16 @@ class ResumeParser(object):
         try:
             self.__details['experience'] = entities['experience']
             try:
+                self.__details['total_experience'] = cust_ent['Years of Experience']      
+            except KeyError:
                 exp = round(
                     utils.get_total_experience(entities['experience']) / 12,
                     2
                 )
-                self.__details['total_experience'] = exp
-            except KeyError:
-                self.__details['total_experience'] = 0
+                self.__details['total_experience'] = str(exp) + "Years"
         except KeyError:
-            self.__details['total_experience'] = 0
-
+            self.__details['total_experience'] = str(0) + "Years"
+ 
         return
 
 

@@ -1,4 +1,5 @@
 import io
+import csv
 import os
 import re
 import nltk
@@ -190,7 +191,7 @@ def extract_entity_sections_grad(text):
     # for entity in cs.RESUME_SECTIONS:
     #     if entity not in entities.keys():
     #         entities[entity] = None
-    # print(entities)
+    # print("entity",entities)
     return entities
 
 
@@ -225,7 +226,7 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     entities =  {k: v.replace("b.Tech","B.Tech") for k,v in entities.items()}    
     entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}    
     entities =  {k: v.replace("INSTITUTE OF ENGINEERING & \nTECHNOLOGY","KRISHNA INSTITUTE OF ENGINEERING & TECHNOLOGY") for k,v in entities.items()}    
-    
+    entities =  {k: v.replace("of experience in development","") for k,v in entities.items()}    
     return entities
 
 
@@ -402,12 +403,14 @@ def extract_skills(nlp_text, noun_chunks, skills_file=None):
     else:
         data = pd.read_csv(skills_file)
     skills = list(data.columns.values)
+    
     skillset = []
     # check for one-grams
     for token in tokens:
         if token.lower() in skills:
             skillset.append(token)
 
+    
     # check for bi-grams and tri-grams
     for token in noun_chunks:
         token = token.text.lower().strip()
@@ -434,7 +437,47 @@ def extract_skills(nlp_text, noun_chunks, skills_file=None):
     for element in Skill_List:
         Skill_String =  element + "," + Skill_String
     Skill_String = Skill_String[:-1]
+
     return Skill_String
+
+def extract_college(nlp_text,noun_chunks):
+    '''
+    Helper function to extract college 
+
+    :param nlp_text: object of `spacy.tokens.doc.Doc`
+    :param noun_chunks: noun chunks extracted from nlp text
+    :return: string of college Name
+    '''
+    tokens = [token.text for token in nlp_text if not token.is_stop]
+    # print(tokens)
+    
+    with open('pyresparser/College.csv') as f1:
+        reader = csv.reader(f1)
+        data = list(reader)
+    
+    college_list = [item for sublist in data for item in sublist]
+
+    
+    collegeset = []
+    # check for one-grams
+    # for token in tokens:
+    #     if token.lower() in college_list:
+    #         collegeset.append(token)
+
+    # print (noun_chunks)
+    # check for bi-grams and tri-grams
+    for token in noun_chunks:
+        token = token.text.lower().strip()
+        if token in college_list:
+            collegeset.append(token)
+
+    lis =  [i.capitalize() for i in ([i.lower() for i in collegeset])]   
+
+    college_string = ",".join(lis) 
+
+
+    return college_string
+
 
 def cleanup(token, lower=True):
     if lower:
@@ -442,34 +485,39 @@ def cleanup(token, lower=True):
     return token.strip()
 
 
-# def extract_education(nlp_text):
-#     '''
-#     Helper function to extract education from spacy nlp text
+def extract_education(nlp_text,text):
+    '''
+    Helper function to extract education from spacy nlp text
 
-#     :param nlp_text: object of `spacy.tokens.doc.Doc`
-#     :return: tuple of education degree and year if year if found
-#              else only returns education degree
-#     '''
-#     edu = {}
-#     # Extract education degree
-#     try:
-#         for index, text in enumerate(nlp_text):
-#             for tex in text.split():
-#                 tex = re.sub(r'[?|$|.|!|,]', r'', tex)
-#                 if tex.upper() in cs.EDUCATION and tex not in cs.STOPWORDS:
-#                     edu[tex] = text + nlp_text[index + 1]
-#     except IndexError:
-#         pass
+    :param nlp_text: object of `spacy.tokens.doc.Doc`
+    :return: tuple of education degree and year if year if found
+             else only returns education degree
+    '''
+    edu = {}
+    print (nlp_text)
+    # Extract education degree
+    # regeex = r"\\d+\\s+(?:months?|years?)"
+    # experience = re.findall(regeex, nlp_text)
+    # print (experience)
+    try:
+        for index, text in enumerate(nlp_text):
+            for tex in text.split():
+                tex = re.sub(r'[?|$|.|!|,]', r'', tex)
+                if tex.upper() in cs.EDUCATION and tex not in cs.STOPWORDS:
+                    edu[tex] = text + nlp_text[index + 1]
+    except IndexError:
+        pass
 
-#     # Extract year
-#     education = []
-#     for key in edu.keys():
-#         year = re.search(re.compile(cs.YEAR), edu[key])
-#         if year:
-#             education.append((key, ''.join(year.group(0))))
-#         else:
-#             education.append(key)
-#     return education
+    # Extract year
+    education = []
+    for key in edu.keys():
+        year = re.search(re.compile(cs.YEAR), edu[key])
+        if year:
+            education.append((key, ''.join(year.group(0))))
+        else:
+            education.append(key)
+    print (education)
+    return education
 
 
 def extract_experience(resume_text):
@@ -479,6 +527,7 @@ def extract_experience(resume_text):
     :param resume_text: Plain resume text
     :return: list of experience
     '''
+    
     wordnet_lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
 

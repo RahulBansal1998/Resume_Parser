@@ -126,7 +126,7 @@ def convert_dataturks_to_spacy(dataturks_JSON_FilePath):
         return None
 
 
-TRAIN_DATA = trim_entity_spans(convert_dataturks_to_spacy("traindata.json"))
+TRAIN_DATA = trim_entity_spans(convert_dataturks_to_spacy("train_data.txt"))
 
 
 @plac.annotations(
