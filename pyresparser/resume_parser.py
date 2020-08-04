@@ -26,7 +26,7 @@ class ResumeParser(object):
             #entities 
             'name': None,
             'Email': None,
-            'mobile_number': None,
+            'Contact Number': None,
             'skills': None,
             'Institute_name': None,
             'degree': None,
@@ -96,7 +96,7 @@ class ResumeParser(object):
         self.__details['Email'] = email
 
         # extract mobile number
-        self.__details['mobile_number'] = mobile
+        self.__details['Contact Number'] = mobile
 
         # extract skills
         self.__details['skills'] = skills
@@ -124,6 +124,9 @@ class ResumeParser(object):
             self.__details['degree'] = cust_ent['Degree']
         except KeyError:
             self.__details['degree'] = Degree
+            
+            
+
         #extract Total Experience
         try:
             self.__details['total_experience'] = cust_ent['years of experience']                  

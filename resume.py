@@ -67,7 +67,7 @@ if Directory_Name:            #If User Enters Directory in command line
             return FileName 
         FileName = Document_to_pdf(i)
 
-        
+        # print(FileName)
         try:
             Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser  
             Resume_Data['Top skills'] = Resume_Data['skills']
@@ -75,7 +75,7 @@ if Directory_Name:            #If User Enters Directory in command line
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
             Resume_dataframe = Resume_dataframe.transpose()
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
-     
+    
         except:
             print("Enter Correct Directory")
 
@@ -86,7 +86,8 @@ def main():             #main function to write to excel
     workbook_object = writer.book
     worksheet_object  = writer.sheets['Sheet1'] 
     format_object1 = workbook_object.add_format({'text_wrap': True,'valign': 'top'})  #added Text Wrap
-    worksheet_object.set_column('B:E', 25)           #setting column width
+    worksheet_object.set_column('B:D', 25)           #setting column width
+    worksheet_object.set_column('E:E', 33),format_object1           #setting column width
     worksheet_object.set_column('F:L', 33,format_object1)
     writer.save()
 

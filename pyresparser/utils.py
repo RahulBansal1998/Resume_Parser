@@ -362,16 +362,7 @@ def extract_mobile_number(text, custom_regex=None):
     :param text: plain text extracted from resume file
     :return: string of extracted mobile numbers
     '''
-    # Found this complicated regex on :
-    # https://zapier.com/blog/extract-links-email-phone-regex/
-    # mob_num_regex = r'''(?:(?:\+?([1-9]|[0-9][0-9]|
-    #     [0-9][0-9][0-9])\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|
-    #     [2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([0-9][1-9]|
-    #     [0-9]1[02-9]|[2-9][02-8]1|
-    #     [2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|
-    #     [2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{7})
-    #     (?:\s*(?:#|x\.?|ext\.?|
-    #     extension)\s*(\d+))?'''
+
     mob_regex = r"\+?\d[\d -]{8,12}\d"
     if not custom_regex:
         mob_num_regex = r'''(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)
@@ -471,17 +462,17 @@ def extract_degree(nlp_text,noun_chunks):
         if token.lower() in degree_list:
             degree_set.append(token)
 
-    # check for bi-grams and tri-grams
-    # for token in noun_chunks:
-    #     token = token.text.lower().strip()
-    #     if token in degree_list:
-    #         degree_set.append(token)
+    #check for bi-grams and tri-grams
+    for token in noun_chunks:
+        token = token.text.lower().strip()
+        if token in degree_list:
+            degree_set.append(token)
     if degree_set:
         degree_set = degree_set[0]
 
    
     degree_string = "".join(degree_set) 
-
+    # print(degree_string)
 
     return degree_string
 
