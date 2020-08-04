@@ -30,7 +30,7 @@ class ResumeParser(object):
             'skills': None,
             'Institute_name': None,
             'degree': None,
-
+            'Location':None,
             'total_experience': None,
             
 
@@ -100,6 +100,15 @@ class ResumeParser(object):
             self.__details['Institute_name'] = cust_ent['College Name']
         except (IndexError, KeyError):
             self.__details['Institute_name'] = college
+
+        #extract location
+        try:
+            location = cust_ent['Location']
+            if location:
+                location = location.split(",")[0]
+            self.__details['Location'] = location
+        except :
+            pass
      
 
         # extract education Degree

@@ -477,7 +477,6 @@ def extract_degree(nlp_text,noun_chunks):
 
    
     degree_string = "".join(degree_set) 
-    print(degree_string)
 
 
     return degree_string
