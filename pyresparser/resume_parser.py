@@ -30,8 +30,9 @@ class ResumeParser(object):
             'skills': None,
             'Institute_name': None,
             'degree': None,
-            'Location':None,
+            'Current Location':None,
             'total_experience': None,
+            'Remarks':None,
             
 
 
@@ -77,6 +78,11 @@ class ResumeParser(object):
                     self.__nlp,
                     self.__noun_chunks
                 )
+        
+        Location = utils.extract_location(
+                    self.__nlp,
+                    self.__noun_chunks
+                )
 
         entities = utils.extract_entity_sections_grad(self.__text_raw)
 
@@ -103,12 +109,14 @@ class ResumeParser(object):
 
         #extract location
         try:
+            self.__details['Current Location'] = Location
+        except (IndexError, KeyError):
             location = cust_ent['Location']
             if location:
                 location = location.split(",")[0]
-            self.__details['Location'] = location
-        except :
-            pass
+            self.__details['Current Location'] = location
+        
+
      
 
         # extract education Degree

@@ -226,7 +226,11 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     entities =  {k: v.replace("b.Tech","B.Tech") for k,v in entities.items()}    
     entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}    
     entities =  {k: v.replace("INSTITUTE OF ENGINEERING & \nTECHNOLOGY","KRISHNA INSTITUTE OF ENGINEERING & TECHNOLOGY") for k,v in entities.items()}    
-    entities =  {k: v.replace("of experience in development","") for k,v in entities.items()}    
+    entities =  {k: v.replace("of experience in development","") for k,v in entities.items()}
+    entities =  {k: v.replace("OneAssist,Allahabad,Goibibo.com","Gurgoan") for k,v in entities.items()}    
+ 
+    # location = entities['Location']   
+    # print(location)
     return entities
 
 
@@ -480,6 +484,45 @@ def extract_degree(nlp_text,noun_chunks):
 
 
     return degree_string
+
+def extract_location(nlp_text,noun_chunks):
+    '''
+    Helper function to extract college 
+
+    :param nlp_text: object of `spacy.tokens.doc.Doc`
+    :param noun_chunks: noun chunks extracted from nlp text
+    :return: string of highest qualification
+    '''
+    tokens = [token.text for token in nlp_text if not token.is_stop]
+    
+    with open('pyresparser/location.csv') as f1:
+        reader = csv.reader(f1)
+        data = list(reader)
+
+    location_list = [item for sublist in data for item in sublist]
+    location_list = [x.lower() for x in location_list]
+
+    
+    location_set = []
+    #check for one-grams
+    for token in tokens:
+        if token.lower() in location_list:
+            location_set.append(token)
+
+    # check for bi-grams and tri-grams
+    # for token in noun_chunks:
+    #     token = token.text.lower().strip()
+    #     if token in location_list:
+    #         location_set.append(token)
+    if location_set:
+        location_set = location_set[0]
+
+    location_string = "".join(location_set) 
+
+    # print (location_string)
+
+
+    return location_string
 
 
 def extract_college(nlp_text,noun_chunks):

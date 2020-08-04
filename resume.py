@@ -66,6 +66,7 @@ if Directory_Name:            #If User Enters Directory in command line
                 FileName = "PDF/" + FileName + ".pdf"  
             return FileName 
         FileName = Document_to_pdf(i)
+
         
         try:
             Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser  
