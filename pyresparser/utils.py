@@ -251,7 +251,7 @@ def get_total_experience(experience_list):
         [get_number_of_months_from_dates(i[0], i[2]) for i in exp_]
     )
     total_experience_in_months = total_exp
-    print ("tt",total_experience_in_months)
+    # print ("tt",total_experience_in_months)
     return total_experience_in_months
 
 
@@ -442,6 +442,47 @@ def extract_skills(nlp_text, noun_chunks, skills_file=None):
 
     return Skill_String
 
+
+def extract_degree(nlp_text,noun_chunks):
+    '''
+    Helper function to extract college 
+
+    :param nlp_text: object of `spacy.tokens.doc.Doc`
+    :param noun_chunks: noun chunks extracted from nlp text
+    :return: string of highest qualification
+    '''
+    tokens = [token.text for token in nlp_text if not token.is_stop]
+    
+    with open('pyresparser/degree.csv') as f1:
+        reader = csv.reader(f1)
+        data = list(reader)
+
+    degree_list = [item for sublist in data for item in sublist]
+    degree_list = [x.lower() for x in degree_list]
+
+    
+    degree_set = []
+    #check for one-grams
+    for token in tokens:
+        if token.lower() in degree_list:
+            degree_set.append(token)
+
+    # check for bi-grams and tri-grams
+    # for token in noun_chunks:
+    #     token = token.text.lower().strip()
+    #     if token in degree_list:
+    #         degree_set.append(token)
+    if degree_set:
+        degree_set = degree_set[0]
+
+   
+    degree_string = "".join(degree_set) 
+    print(degree_string)
+
+
+    return degree_string
+
+
 def extract_college(nlp_text,noun_chunks):
     '''
     Helper function to extract college 
@@ -463,7 +504,7 @@ def extract_college(nlp_text,noun_chunks):
     # check for one-grams
     # for token in tokens:
     #     if token.lower() in college_list:
-    #         collegeset.append(token)
+    #         collegeset.append(token)s
 
     # print (noun_chunks)
     # check for bi-grams and tri-grams
@@ -475,7 +516,6 @@ def extract_college(nlp_text,noun_chunks):
     lis =  [i.capitalize() for i in ([i.lower() for i in collegeset])]   
 
     college_string = ",".join(lis) 
-
 
     return college_string
 

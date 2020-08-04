@@ -9,7 +9,7 @@ from . import utils
 
 
 class ResumeParser(object):
-    ''' Main class to define all entity global variable'''             
+    ''' Main class to define all entity global variable resume.py is calling this class  '''             
 
     def __init__(
         self,
@@ -30,9 +30,7 @@ class ResumeParser(object):
             'skills': None,
             'Institute_name': None,
             'degree': None,
-            'designation': None,
-            'experience': None,
-            'company_names': None,
+
             'total_experience': None,
             
 
@@ -69,6 +67,7 @@ class ResumeParser(object):
         email = utils.extract_email(self.__text)
         mobile = utils.extract_mobile_number(self.__text, self.__custom_regex)
         experiences = utils.extracts_experience(self.__text)
+        Degree = utils.extract_degree(self.__nlp,self.__noun_chunks)
         skills = utils.extract_skills(
                     self.__nlp,
                     self.__noun_chunks,
@@ -107,32 +106,17 @@ class ResumeParser(object):
         try:
             self.__details['degree'] = cust_ent['Degree']
         except KeyError:
-            pass
-
-        # extract designation
-        try:
-            self.__details['designation'] = cust_ent['Designation']
-        except KeyError:
-            pass
+            self.__details['degree'] = Degree
         #extract Total Experience
         try:
-            self.__details['total_experience'] = experiences                  
+            self.__details['total_experience'] = cust_ent['years of experience']                  
         except KeyError:
-            pass
+            self.__details['total_experience'] = experiences
+            # pass
             # exp = round(utils.get_total_experience(entities['experience']) / 12,2)
             # self.__details['total_experience'] = exp
 
 
-        # extract company names
-        try:
-            self.__details['company_names'] = cust_ent['Companies worked at']
-        except KeyError:
-            pass
-        #Extract Experience
-        try:
-            self.__details['experience'] = entities['experience']
-        except:
-            pass
  
         return
 
