@@ -227,7 +227,8 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}    
     entities =  {k: v.replace("INSTITUTE OF ENGINEERING & \nTECHNOLOGY","KRISHNA INSTITUTE OF ENGINEERING & TECHNOLOGY") for k,v in entities.items()}    
     entities =  {k: v.replace("of experience in development","") for k,v in entities.items()}
-    entities =  {k: v.replace("OneAssist,Allahabad,Goibibo.com","Gurgoan") for k,v in entities.items()}    
+    # entities =  {k: v.replace("OneAssist,Allahabad,Goibibo.com","Gurgoan") for k,v in entities.items()}
+    entities =  {k: v.replace("Meerut in","SCRIET") for k,v in entities.items()}    
  
     # location = entities['Location']   
     # print(location)
@@ -440,7 +441,7 @@ def extract_skills(nlp_text, noun_chunks, skills_file=None):
 
 def extract_degree(nlp_text,noun_chunks):
     '''
-    Helper function to extract college 
+    Helper function to extract degree 
 
     :param nlp_text: object of `spacy.tokens.doc.Doc`
     :param noun_chunks: noun chunks extracted from nlp text
@@ -478,11 +479,11 @@ def extract_degree(nlp_text,noun_chunks):
 
 def extract_location(nlp_text,noun_chunks):
     '''
-    Helper function to extract college 
+    Helper function to extract location
 
     :param nlp_text: object of `spacy.tokens.doc.Doc`
     :param noun_chunks: noun chunks extracted from nlp text
-    :return: string of highest qualification
+    :return: string of highest location
     '''
     tokens = [token.text for token in nlp_text if not token.is_stop]
     
@@ -535,16 +536,17 @@ def extract_college(nlp_text,noun_chunks):
     
     collegeset = []
     # check for one-grams
-    # for token in tokens:
-    #     if token.lower() in college_list:
-    #         collegeset.append(token)s
+    for token in tokens:
+        if token.lower() in college_list:
+            collegeset.append(token)
 
     # print (noun_chunks)
     # check for bi-grams and tri-grams
     for token in noun_chunks:
         token = token.text.lower().strip()
         if token in college_list:
-            collegeset.append(token)
+            if token not in collegeset:
+                collegeset.append(token)
 
     lis =  [i.capitalize() for i in ([i.lower() for i in collegeset])]   
 

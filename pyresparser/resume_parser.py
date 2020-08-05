@@ -1,4 +1,3 @@
-
 import os
 import multiprocessing as mp
 import io
@@ -24,14 +23,14 @@ class ResumeParser(object):
         self.__matcher = Matcher(nlp.vocab)
         self.__details = {       
             #entities 
-            'name': None,
+            'Name': None,
             'Email': None,
             'Contact Number': None,
-            'skills': None,
             'Institute_name': None,
             'degree': None,
             'Current Location':None,
             'total_experience': None,
+            'Top skills': None,
             'Remarks':None,
             
 
@@ -88,9 +87,9 @@ class ResumeParser(object):
 
         # extract name
         try:
-            self.__details['name'] = cust_ent['Name']
+            self.__details['Name'] = cust_ent['Name']
         except (IndexError, KeyError):
-            self.__details['name'] = name
+            self.__details['Name'] = name
 
         # extract Email
         self.__details['Email'] = email
@@ -99,12 +98,13 @@ class ResumeParser(object):
         self.__details['Contact Number'] = mobile
 
         # extract skills
-        self.__details['skills'] = skills
+        self.__details['Top skills'] = skills
 
         #extract_colllege_name
         try:
+            
             self.__details['Institute_name'] = cust_ent['College Name']
-        except (IndexError, KeyError):
+        except:
             self.__details['Institute_name'] = college
 
         #extract location

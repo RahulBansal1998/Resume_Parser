@@ -44,8 +44,6 @@ if FileName:     #If User Enters file
     try:
         '''creating dataframe  and calling get_extrcated_data() function from resume_parser.py file inside in pyresparser folder '''
         Resume_Data = ResumeParser(FileName).get_extracted_data()            
-        Resume_Data['Top skills'] = Resume_Data['skills']
-        del Resume_Data['skills']  
         Resume_Dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')                #DataFrame from Dict
         Resume_Dataframe = Resume_Dataframe.transpose()                                       #Transpose of dataframe
     except:
@@ -70,8 +68,7 @@ if Directory_Name:            #If User Enters Directory in command line
         # print(FileName)
         try:
             Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser  
-            Resume_Data['Top skills'] = Resume_Data['skills']
-            del Resume_Data['skills']                                                                            #Renaming Skill to top_skill
+                                                                            #Renaming Skill to top_skill
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
             Resume_dataframe = Resume_dataframe.transpose()
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
