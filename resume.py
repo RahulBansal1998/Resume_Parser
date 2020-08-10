@@ -14,7 +14,7 @@ def Argument_Parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--filepath',help='path to resume file')         #Taking arguments
     parser.add_argument('--directory',help="directory containing all the resumes to be extracted") #Taking arguments
-    parser.add_argument('--excel',git help='Excel Filename')   #Taking arguments
+    parser.add_argument('--excel',required=True,help='Excel Filename')   #Taking arguments
     args = parser.parse_args()
     FileName = args.filepath
     Excel_Filename = args.excel 
