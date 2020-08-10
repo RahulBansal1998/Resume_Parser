@@ -17,10 +17,8 @@ Welcome to Resume Parser's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
-   modules   
-
+  
+   modules
 
 
 Indices and tables

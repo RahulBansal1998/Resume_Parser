@@ -8,7 +8,9 @@ from . import utils
 
 
 class ResumeParser(object):
-    ''' Main class to define all entity global variable resume.py is calling this class  '''             
+    ''' Main class to define 
+    all entity global variable 
+    resume.py is calling this class  '''             
 
     def __init__(
         self,
@@ -63,11 +65,7 @@ class ResumeParser(object):
         mobile = utils.extract_mobile_number(self.__text, self.__custom_regex)
         experiences = utils.extracts_experience(self.__text)
         Degree = utils.extract_degree(self.__nlp,self.__noun_chunks)
-        skills = utils.extract_skills(
-                    self.__nlp,
-                    self.__noun_chunks,
-                    self.__skills_file
-                )
+        
         college = utils.extract_college(
                     self.__nlp,
                     self.__noun_chunks
@@ -92,8 +90,7 @@ class ResumeParser(object):
         # extract mobile number
         self.__details['Contact Number'] = mobile
 
-        # extract skills
-        # self.__details['Top skills'] = skills
+
 
         #extract_colllege_name
         try:
@@ -127,9 +124,7 @@ class ResumeParser(object):
             self.__details['total_experience'] = cust_ent['years of experience']                  
         except KeyError:
             self.__details['total_experience'] = experiences
-            # pass
-            # exp = round(utils.get_total_experience(entities['experience']) / 12,2)
-            # self.__details['total_experience'] = exp
+
 
 
  
