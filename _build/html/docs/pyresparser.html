@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pyresparser package &mdash; Resume Parser  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Resume Parser
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pyresparser package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyresparser.constants">pyresparser.constants module</a></li>
+<li><a class="reference internal" href="#module-pyresparser.resume_parser">pyresparser.resume_parser module</a></li>
+<li><a class="reference internal" href="#module-pyresparser.utils">pyresparser.utils module</a></li>
+<li><a class="reference internal" href="#module-pyresparser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Resume Parser</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>pyresparser package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/docs/pyresparser.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pyresparser-package">
+<h1>pyresparser package<a class="headerlink" href="#pyresparser-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyresparser.constants">
+<span id="pyresparser-constants-module"></span><h2>pyresparser.constants module<a class="headerlink" href="#module-pyresparser.constants" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyresparser.resume_parser">
+<span id="pyresparser-resume-parser-module"></span><h2>pyresparser.resume_parser module<a class="headerlink" href="#module-pyresparser.resume_parser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyresparser.resume_parser.ResumeParser">
+<em class="property">class </em><code class="descclassname">pyresparser.resume_parser.</code><code class="descname">ResumeParser</code><span class="sig-paren">(</span><em>resume</em>, <em>skills_file=None</em>, <em>custom_regex=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.resume_parser.ResumeParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="pyresparser.resume_parser.ResumeParser.get_extracted_data">
+<code class="descname">get_extracted_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.resume_parser.ResumeParser.get_extracted_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.resume_parser.resume_result_wrapper">
+<code class="descclassname">pyresparser.resume_parser.</code><code class="descname">resume_result_wrapper</code><span class="sig-paren">(</span><em>resume</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.resume_parser.resume_result_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyresparser.utils">
+<span id="pyresparser-utils-module"></span><h2>pyresparser.utils module<a class="headerlink" href="#module-pyresparser.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyresparser.utils.cleanup">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">cleanup</code><span class="sig-paren">(</span><em>token</em>, <em>lower=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.cleanup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_education">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_education</code><span class="sig-paren">(</span><em>nlp_text</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_education" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract education from spacy nlp text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nlp_text</strong> – object of <cite>spacy.tokens.doc.Doc</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tuple of education degree and year if year if found
+else only returns education degree</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_email">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_email</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract email id from text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>text</strong> – plain text extracted from resume file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_entities_wih_custom_model">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_entities_wih_custom_model</code><span class="sig-paren">(</span><em>custom_nlp_text</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_entities_wih_custom_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract different entities with custom
+trained model using SpaCy’s NER</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>custom_nlp_text</strong> – object of <cite>spacy.tokens.doc.Doc</cite></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dictionary of entities</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_entity_sections_grad">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_entity_sections_grad</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_entity_sections_grad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract all the raw text from sections of
+resume specifically for graduates and undergraduates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>text</strong> – Raw text of resume</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dictionary of entities</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_entity_sections_professional">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_entity_sections_professional</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_entity_sections_professional" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract all the raw text from sections of
+resume specifically for professionals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>text</strong> – Raw text of resume</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dictionary of entities</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_experience">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_experience</code><span class="sig-paren">(</span><em>resume_text</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_experience" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract experience from resume text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resume_text</strong> – Plain resume text</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of experience</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_mobile_number">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_mobile_number</code><span class="sig-paren">(</span><em>text</em>, <em>custom_regex=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_mobile_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract mobile number from text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>text</strong> – plain text extracted from resume file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string of extracted mobile numbers</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_name">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_name</code><span class="sig-paren">(</span><em>nlp_text</em>, <em>matcher</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract name from spacy nlp text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nlp_text</strong> – object of <cite>spacy.tokens.doc.Doc</cite></li>
+<li><strong>matcher</strong> – object of <cite>spacy.matcher.Matcher</cite></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string of full name</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_skills">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_skills</code><span class="sig-paren">(</span><em>nlp_text</em>, <em>noun_chunks</em>, <em>skills_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_skills" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract skills from spacy nlp text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nlp_text</strong> – object of <cite>spacy.tokens.doc.Doc</cite></li>
+<li><strong>noun_chunks</strong> – noun chunks extracted from nlp text</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list of skills extracted</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_text">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_text</code><span class="sig-paren">(</span><em>file_path</em>, <em>extension</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper function to detect the file extension and call text
+extraction function accordingly</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>file_path</strong> – path of file of which text is to be extracted</li>
+<li><strong>extension</strong> – extension of file <cite>file_name</cite></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_text_from_doc">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_text_from_doc</code><span class="sig-paren">(</span><em>doc_path</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_text_from_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract plain text from .doc files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>doc_path</strong> – path to .doc file to be extracted</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string of extracted text</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_text_from_docx">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_text_from_docx</code><span class="sig-paren">(</span><em>doc_path</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_text_from_docx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract plain text from .docx files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>doc_path</strong> – path to .docx file to be extracted</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string of extracted text</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.extract_text_from_pdf">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">extract_text_from_pdf</code><span class="sig-paren">(</span><em>pdf_path</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.extract_text_from_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract the plain text from .pdf files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pdf_path</strong> – path to PDF file to be extracted (remote or local)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">iterator of string of extracted text</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.get_number_of_months_from_dates">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">get_number_of_months_from_dates</code><span class="sig-paren">(</span><em>date1</em>, <em>date2</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.get_number_of_months_from_dates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to extract total months of experience from a resume</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>date1</strong> – Starting date</li>
+<li><strong>date2</strong> – Ending date</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">months of experience from date1 to date2</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.get_number_of_pages">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">get_number_of_pages</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.get_number_of_pages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pyresparser.utils.get_total_experience">
+<code class="descclassname">pyresparser.utils.</code><code class="descname">get_total_experience</code><span class="sig-paren">(</span><em>experience_list</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.utils.get_total_experience" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper function to extract total months of experience from a resume</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experience_list</strong> – list of experience text extracted</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">total months of experience</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyresparser">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyresparser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyresparser.ResumeParser">
+<em class="property">class </em><code class="descclassname">pyresparser.</code><code class="descname">ResumeParser</code><span class="sig-paren">(</span><em>resume</em>, <em>skills_file=None</em>, <em>custom_regex=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.ResumeParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="pyresparser.ResumeParser.get_extracted_data">
+<code class="descname">get_extracted_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyresparser.ResumeParser.get_extracted_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, RB
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

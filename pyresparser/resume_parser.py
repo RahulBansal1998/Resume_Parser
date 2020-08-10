@@ -30,12 +30,7 @@ class ResumeParser(object):
             'degree': None,
             'Current Location':None,
             'total_experience': None,
-            
-            'Remarks':None,
-            
-
-
-            
+            'Remarks':None,            
         }
         self.__resume = resume
         if not isinstance(self.__resume, io.BytesIO):

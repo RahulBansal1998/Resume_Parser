@@ -71,12 +71,4 @@ For Directory:
 The module would return a Excel File
 
 
-# References that helped me get here
-
-- Some of the core concepts behind the algorithm have been taken from [https://github.com/divapriya/Language_Processing](https://github.com/divapriya/Language_Processing) which has been summed up in this blog [https://medium.com/@divalicious.priya/information-extraction-from-cv-acec216c3f48](https://medium.com/@divalicious.priya/information-extraction-from-cv-acec216c3f48). Thanks to Priya for sharing this concept
-
-- [https://www.kaggle.com/nirant/hitchhiker-s-guide-to-nlp-in-spacy](https://www.kaggle.com/nirant/hitchhiker-s-guide-to-nlp-in-spacy)
-
-- [https://www.analyticsvidhya.com/blog/2017/04/natural-language-processing-made-easy-using-spacy-%E2%80%8Bin-python/](https://www.analyticsvidhya.com/blog/2017/04/natural-language-processing-made-easy-using-spacy-%E2%80%8Bin-python/)
-
 

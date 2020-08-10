@@ -227,67 +227,12 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}    
     entities =  {k: v.replace("INSTITUTE OF ENGINEERING & \nTECHNOLOGY","KRISHNA INSTITUTE OF ENGINEERING & TECHNOLOGY") for k,v in entities.items()}    
     entities =  {k: v.replace("of experience in development","") for k,v in entities.items()}
-    # entities =  {k: v.replace("OneAssist,Allahabad,Goibibo.com","Gurgoan") for k,v in entities.items()}
     entities =  {k: v.replace("Meerut in","SCRIET") for k,v in entities.items()}    
- 
-    # location = entities['Location']   
-    # print(location)
+
     return entities
 
 
-def get_total_experience(experience_list):
-    '''
-    Wrapper function to extract total months of experience from a resume
 
-    :param experience_list: list of experience text extracted
-    :return: total months of experience
-    '''
- 
-    exp_ = []
-    for line in experience_list:
-        experience = re.search(
-            r'(?P<fmonth>\w+.\d+)\s*(\D|to)\s*(?P<smonth>\w+.\d+|present)',
-            line,
-            re.I
-        )
-        if experience:
-            exp_.append(experience.groups())
-    total_exp = sum(
-        [get_number_of_months_from_dates(i[0], i[2]) for i in exp_]
-    )
-    total_experience_in_months = total_exp
-    # print ("tt",total_experience_in_months)
-    return total_experience_in_months
-
-
-def get_number_of_months_from_dates(date1, date2):
-    '''
-    Helper function to extract total months of experience from a resume
-
-    :param date1: Starting date
-    :param date2: Ending date
-    :return: months of experience from date1 to date2
-    '''
-    if date2.lower() == 'present':
-        date2 = datetime.now().strftime('%b %Y')
-    try:
-        if len(date1.split()[0]) > 3:
-            date1 = date1.split()
-            date1 = date1[0][:3] + ' ' + date1[1]
-        if len(date2.split()[0]) > 3:
-            date2 = date2.split()
-            date2 = date2[0][:3] + ' ' + date2[1]
-    except IndexError:
-        return 0
-    try:
-        date1 = datetime.strptime(str(date1), '%b %Y')
-        date2 = datetime.strptime(str(date2), '%b %Y')
-        months_of_experience = relativedelta.relativedelta(date2, date1)
-        months_of_experience = (months_of_experience.years
-                                * 12 + months_of_experience.months)
-    except ValueError:
-        return 0
-    return months_of_experience
 
 
 def extract_entity_sections_professional(text):
