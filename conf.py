@@ -19,12 +19,13 @@
 #
 import os
 import sys
-sys.path.append("~/Desktop/sphinx/resume/Resume_Parser")
-
-
+sys.path.insert(0, os.path.abspath('.'))
 
 
 # -- General configuration ------------------------------------------------
+
+exclude_patterns = ['index.rst','modules.rst']
+
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
