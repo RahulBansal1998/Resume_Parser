@@ -30,7 +30,7 @@ class ResumeParser(object):
             'degree': None,
             'Current Location':None,
             'total_experience': None,
-            'Top skills': None,
+            
             'Remarks':None,
             
 
@@ -98,7 +98,7 @@ class ResumeParser(object):
         self.__details['Contact Number'] = mobile
 
         # extract skills
-        self.__details['Top skills'] = skills
+        # self.__details['Top skills'] = skills
 
         #extract_colllege_name
         try:
