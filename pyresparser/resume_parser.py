@@ -25,13 +25,28 @@ class ResumeParser(object):
         self.__matcher = Matcher(nlp.vocab)
         self.__details = {       
             #entities 
+            'Status' : None,
+            'Source' : None,
+            'HR Comments' : None,
             'Name': None,
-            'Email': None,
+            'Resume ID' : None,
+            'ROUND 1' : None,
+            'ROUND 2' : None,
+            'ROUND 3' : None,
+            'ROUND 4' : None,
+            'Client Round':None,
             'Contact Number': None,
-            'Institute_name': None,
-            'degree': None,
+            'Email ID': None,
+            'Current CTC(in lpa)':None,
+            'Expected CTC(in lpa)':None,
             'Current Location':None,
-            'total_experience': None,
+            'Notice Period(in-months)':None,
+            'Highest Qualification and passing year': None,
+            'Institute_name': None,
+            'Certification (if any)':None,
+            'Overall Experience': None,
+            'Relevant Experience':None,
+            'Reason for job change':None,
             'Remarks':None,            
         }
         self.__resume = resume
@@ -85,7 +100,7 @@ class ResumeParser(object):
             self.__details['Name'] = name
 
         # extract Email
-        self.__details['Email'] = email
+        self.__details['Email ID'] = email
 
         # extract mobile number
         self.__details['Contact Number'] = mobile
@@ -113,17 +128,17 @@ class ResumeParser(object):
 
         # extract education Degree
         try:
-            self.__details['degree'] = cust_ent['Degree']
+            self.__details['Highest Qualification and passing year'] = cust_ent['Degree']
         except KeyError:
-            self.__details['degree'] = Degree
+            self.__details['Highest Qualification and passing year'] = Degree
             
             
 
         #extract Total Experience
         try:
-            self.__details['total_experience'] = cust_ent['years of experience']                  
+            self.__details['Overall Experience'] = cust_ent['years of experience']                  
         except KeyError:
-            self.__details['total_experience'] = experiences
+            self.__details['Overall Experience'] = experiences
 
 
 
