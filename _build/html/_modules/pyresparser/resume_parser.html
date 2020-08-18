@@ -182,13 +182,28 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__matcher</span> <span class="o">=</span> <span class="n">Matcher</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__details</span> <span class="o">=</span> <span class="p">{</span>       
             <span class="c1">#entities </span>
+            <span class="s1">&#39;Status&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Source&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;HR Comments&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;Email&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Resume ID&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;ROUND 1&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;ROUND 2&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;ROUND 3&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;ROUND 4&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Client Round&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
             <span class="s1">&#39;Contact Number&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;Institute_name&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;degree&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Email ID&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Current CTC(in lpa)&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Expected CTC(in lpa)&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
             <span class="s1">&#39;Current Location&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;total_experience&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Notice Period(in-months)&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Highest Qualification and passing year&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Institute_name&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Certification (if any)&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Overall Experience&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Relevant Experience&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;Reason for job change&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
             <span class="s1">&#39;Remarks&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>            
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__resume</span> <span class="o">=</span> <span class="n">resume</span>
@@ -242,7 +257,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
 
         <span class="c1"># extract Email</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;Email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;Email ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">email</span>
 
         <span class="c1"># extract mobile number</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;Contact Number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mobile</span>
@@ -270,17 +285,17 @@
 
         <span class="c1"># extract education Degree</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;degree&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cust_ent</span><span class="p">[</span><span class="s1">&#39;Degree&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;Highest Qualification and passing year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cust_ent</span><span class="p">[</span><span class="s1">&#39;Degree&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;degree&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Degree</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;Highest Qualification and passing year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Degree</span>
             
             
 
         <span class="c1">#extract Total Experience</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;total_experience&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cust_ent</span><span class="p">[</span><span class="s1">&#39;years of experience&#39;</span><span class="p">]</span>                  
+            <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;Overall Experience&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cust_ent</span><span class="p">[</span><span class="s1">&#39;years of experience&#39;</span><span class="p">]</span>                  
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;total_experience&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">experiences</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__details</span><span class="p">[</span><span class="s1">&#39;Overall Experience&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">experiences</span>
 
 
 

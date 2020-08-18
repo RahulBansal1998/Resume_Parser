@@ -164,35 +164,44 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="resume-module">
-<h1>resume module<a class="headerlink" href="#resume-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-resume">
+<span id="resume-module"></span><h1>resume module<a class="headerlink" href="#module-resume" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="resume.Argument_Parser">
+<code class="descclassname">resume.</code><code class="descname">Argument_Parser</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/resume.html#Argument_Parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#resume.Argument_Parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Taking arguments from user</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="resume.Document_to_pdf">
+<code class="descclassname">resume.</code><code class="descname">Document_to_pdf</code><span class="sig-paren">(</span><em>FileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/resume.html#Document_to_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#resume.Document_to_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>converting to pdf 
+when user entered doc and docx</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="resume.dataframe_for_Directory">
+<code class="descclassname">resume.</code><code class="descname">dataframe_for_Directory</code><span class="sig-paren">(</span><em>Directory_Name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/resume.html#dataframe_for_Directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#resume.dataframe_for_Directory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="resume.dataframe_for_filepath">
+<code class="descclassname">resume.</code><code class="descname">dataframe_for_filepath</code><span class="sig-paren">(</span><em>FileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/resume.html#dataframe_for_filepath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#resume.dataframe_for_filepath" title="Permalink to this definition">¶</a></dt>
+<dd><p>creating dataframe  and calling 
+get_extrcated_data() function from 
+resume_parser.py file inside in pyresparser folder</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="resume.main">
+<code class="descclassname">resume.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/resume.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#resume.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
            </div>
-           <p>  it is the main file which runs our Program 
-             argument is passing to this file here we are also importing Resume_parser.py 
-             file which are returning all the information as a Dictionary after getting a dictonary this dictonary is transformed to dataframe which then wrote to excel using xlsxwriter . Various functioning in this files are </p>
-
-              <ol>
-                <li>
-                  -Argument_Parser - used for taking argument in a file 
-                </li>
-                <br>
-                <li>
-                  -Converting files to pdf - here we are converting various formats of resume file to pdf 
-                </li>
-            
-                <br>
-                <li>
-                  -Dataframe - creating dataframe for writing to excel file
-                </li>
-                <br>
-                <li>
-                  -Dump_to_excel - dumping to excel based on the Dataframe
-                </li>
-                <br>
-              </ol>
+           
           </div>
           <footer>
   
