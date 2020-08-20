@@ -6,6 +6,10 @@ import pandas as pd
 import os
 import xlsxwriter
 from pyresparser import ResumeParser      #call to resume_parser file from pyresparser folder
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from df2gspread import df2gspread as d2g
+import numpy as np
 
 
 #Argument Parser
@@ -14,12 +18,10 @@ def Argument_Parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--filepath',help='path to resume file')         #Taking arguments
     parser.add_argument('--directory',help="directory containing all the resumes to be extracted") #Taking arguments
-    parser.add_argument('--excel',required=True,help='Excel Filename')   #Taking arguments
     args = parser.parse_args()
     FileName = args.filepath
-    Excel_Filename = args.excel 
     Directory_Name = args.directory
-    Argument_list = [FileName,Excel_Filename,Directory_Name]
+    Argument_list = [FileName,Directory_Name]
     return Argument_list                                                 #returning argument list
 
 def Document_to_pdf(FileName):
@@ -46,6 +48,7 @@ def dataframe_for_filepath(FileName):
     Resume_Data = ResumeParser(FileName).get_extracted_data()            
     Resume_Dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')                #DataFrame from Dict
     Resume_Dataframe = Resume_Dataframe.transpose()                                       #Transpose of dataframe
+    Resume_Dataframe = Resume_Dataframe.replace(np.nan,"")
     return Resume_Dataframe
 
 
@@ -56,31 +59,32 @@ def dataframe_for_Directory(Directory_Name):
         i = Directory_Name + "/" + i
         FileName = Document_to_pdf(i)
         Resume_Data = ResumeParser(FileName).get_extracted_data()                                            #call to resume_parser file in pyresparser  
-        Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
+        Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index',)
         Resume_dataframe = Resume_dataframe.transpose()
         Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
+        Resume_Dataframe = Resume_Dataframe.replace(np.nan,"")
+        # Resume_Dataframe = Resume_Dataframe.drop(Resume_Dataframe.columns[0],axis=1)
     return Resume_Dataframe
 
 def main():                                                 #main function to write to excel
     argument_list = Argument_Parser()                       #Argument_List
     FileName = argument_list[0]                             #FileName_Argument
-    Excel_Filename = argument_list[1]                       #Excel_Argument
-    Directory_Name = argument_list[2]                       #Directory_Argument      
+    Directory_Name = argument_list[1]                       #Directory_Argument      
     if FileName:
         FileName = Document_to_pdf(FileName)
         Resume_Dataframe = dataframe_for_filepath(FileName)
     if Directory_Name:
         Resume_Dataframe = dataframe_for_Directory(Directory_Name)
 
-    writer = pd.ExcelWriter(Excel_Filename, engine='xlsxwriter')                        #write to excel    
-    Resume_Dataframe.to_excel(writer, sheet_name='Sheet1',index=False)
-    workbook_object = writer.book
-    worksheet_object  = writer.sheets['Sheet1'] 
-    format_object1 = workbook_object.add_format({'text_wrap': True,'valign': 'top'})    #added Text Wrap
-    worksheet_object.set_column('A:L', 20,format_object1)                               #setting column width
-    worksheet_object.set_column('M:U', 33,format_object1)                               #setting column width
-    worksheet_object.set_column('V:W', 22,format_object1)
-    writer.save()
+    scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+    client = gspread.authorize(creds)
+    sheet = client.open("MYDOC").sheet1
+    spreadsheet_key = '1yLPPaMNokmaeL0dU77Nbgn6amv-4MJmgfv7ZWK-qmeM'
+    wks_name = 'Resume_Data'
+    d2g.upload(Resume_Dataframe, spreadsheet_key, wks_name, credentials=creds, row_names=True)
+
+
 
 if __name__ == "__main__":
     main()
