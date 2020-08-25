@@ -20,12 +20,7 @@ def login(remote):
         if remote:
             flags.noauth_local_webserver = True
         creds = tools.run_flow(flow, store, flags)
-        click.secho(
-            "********************** welcome to **********************", bold=True, fg='red')
-        result = pyfiglet.figlet_format("Drive - CLI", font="slant")
-        click.secho(result, fg='yellow')
-        click.secho(
-            "********************************************************", bold=True, fg='red')
+
 
 
 @click.command('login', short_help='login to your google account and authenticate the service')

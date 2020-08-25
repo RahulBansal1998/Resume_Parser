@@ -1,2 +1,3 @@
 drive_cli
+pyresparser
 tests

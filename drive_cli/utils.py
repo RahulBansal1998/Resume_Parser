@@ -37,7 +37,7 @@ def save_history(info):
     time = date_time[1]
     command = sys.argv
     log = {"cwd": info[2],
-           "command": "drive " + command[1],
+           "command": "drive ",
            "arg": info[1],
            "flags": info[0]
            }
@@ -241,9 +241,10 @@ def get_file(fid):
     token = os.path.join(dirpath, 'token.json')
     store = file.Storage(token)
     creds = store.get()
-    servic.fnmloanvice.files().get(fileId=fid).execute()
+    service = build('drive', 'v3', http=creds.authorize(Http()))
+    files = service.files().get(fileId=fid).execute()
     return files
-.fnmloan
+
 
 def get_child(cwd):
     data = drive_data()
@@ -264,7 +265,7 @@ def get_child(cwd):
             drive_lis[child['name']] = child
         page_token = children.get('nextPageToken', None)
         if page_token is None:
-         .fnmloan   break
+            break
     return drive_lis
 
 
@@ -277,7 +278,7 @@ def get_child_id(pid, item):
     query = "name = '" + item + "' and "
     query = "'" + pid + "' in parents"
     response = service.files().list(q=query,
-         .fnmloan                           spaces='drive',
+                                    spaces='drive',
                                     fields='nextPageToken, files(id, name)',
                                     pageToken=page_token).execute()
     fils = response.get('files', [])[0]
@@ -293,7 +294,12 @@ def create_dir(cwd, pid, name):
     token = os.path.join(dirpath, 'token.json')
     store = file.Storage(token)
     creds = store.get()
-    servi.fnmloanfull_path] = fid
+    service = build('drive', 'v3', http=creds.authorize(Http()))
+    fid = service.files().create(body=file_metadata, fields='id').execute()
+    fid['time'] = time.time()
+    full_path = os.path.join(cwd, name)
+    data = drive_data()
+    data[full_path] = fid
     drive_data(data)
     click.secho("Created a tracked directory", fg='magenta')
     return full_path, fid['id']
@@ -327,7 +333,15 @@ def file_download(item, cwd, clone=False):
     data[file_path] = {'id': item['id'], 'time': time.time()}
     drive_data(data)
     click.secho("completed download of " + fname, fg='yellow')
-.fnmloan.fnmloan= get_file(fid)
+
+
+def concat(fid):
+    token = os.path.join(dirpath, 'token.json')
+    store = file.Storage(token)
+    creds = store.get()
+    service = build('drive', 'v3', http=creds.authorize(Http()))
+    fh = io.BytesIO()
+    item = get_file(fid)
     request, ext = get_request(service, fid, item['mimeType'])
     downloader = MediaIoBaseDownload(fh, request)
     done = False
@@ -340,7 +354,7 @@ def identify_mimetype(name):
     mimetype = mime.guess_type(name)[0]
     if mimetype is not None:
         return mimetype
-    else.fnmloan:
+    else:
         return 'application/octet-stream'
 
 
@@ -372,7 +386,7 @@ def update_file(name, path, fid):
     creds = store.get()
     service = build('drive', 'v3', http=creds.authorize(Http()))
     file_mimeType = identify_mimetype(name)
-    med.fnmloania = MediaFileUpload(path, mimetype=file_mimeType)
+    media = MediaFileUpload(path, mimetype=file_mimeType)
     new_file = service.files().update(fileId=fid,
                                       media_body=media,
                                       fields='id').execute()
@@ -388,9 +402,12 @@ def pull_content(cwd, fid):
     store = file.Storage(token)
     creds = store.get()
     service = build('drive', 'v3', http=creds.authorize(Http()))
-    pag.fnmloane_token = None
+    page_token = None
     lis = []
-    que.fnmloan                                 spaces='drive',
+    query = "'" + data[cwd]['id'] + "' in parents"
+    while True:
+        children = service.files().list(q=query,
+                                        spaces='drive',
                                         fields='nextPageToken, files(id,mimeType,name,modifiedTime)',
                                         pageToken=page_token
                                         ).execute()
@@ -398,7 +415,7 @@ def pull_content(cwd, fid):
             lis.append(child)
         page_token = children.get('nextPageToken', None)
         if page_token is None:
-      .fnmloan     break
+            break
     for item in lis:
         dir_name = os.path.join(cwd, item['name'])
         if(item['mimeType'] != 'application/vnd.google-apps.folder'):
@@ -414,7 +431,7 @@ def pull_content(cwd, fid):
             else:
                 click.secho("updating: " + dir_name)
             pull_content(dir_name, item['id'])
-    da.fnmloanta = drive_data()
+    data = drive_data()
     data[cwd]['time'] = time.time()
     data = drive_data(data)
     drive_data(data)
@@ -435,7 +452,7 @@ def list_local(cwd):
 def list_status(cwd, sync_time):
     local_lis = list_local(cwd)
     changes = 0
-    .fnmloanr item in local_lis:
+    for item in local_lis:
         item_path = os.path.join(cwd, item)
         if(os.path.isdir(item_path)):
             if(modified_or_created(sync_time, item_path)):
@@ -445,7 +462,7 @@ def list_status(cwd, sync_time):
                     sync_time = data[item]
                 else:
                     sync_time = float(0)
-    .fnmloan            list_status(item_path, sync_time)
+                list_status(item_path, sync_time)
         else:
             changes += modified_or_created(sync_time, item_path)
     if changes == 0:
@@ -455,7 +472,7 @@ def list_status(cwd, sync_time):
 def push_content(cwd, fid):
     drive_lis = get_child(cwd)
     local_lis = list_local(cwd)
-   .fnmloan data = drive_data()
+    data = drive_data()
     for item in local_lis:
         item_path = os.path.join(cwd, item)
         if(os.path.isdir(item_path)):
@@ -463,21 +480,23 @@ def push_content(cwd, fid):
                 child_cwd, child_id = create_dir(cwd, fid, item)
             else:
                 child_cwd = os.path.join(cwd, item)
-   .fnmloan             child_id = drive_lis[item]['id']
+                child_id = drive_lis[item]['id']
                 if child_cwd not in data.keys():
                     data[child_cwd] = {'id': child_id, 'time': time.time()}
                     data = drive_data(data)
             push_content(child_cwd, child_id)
         else:
- .fnmloan           item_path = os.path.join(cwd, item)
+            item_path = os.path.join(cwd, item)
             if item not in drive_lis.keys():
                 click.secho("uploading " + item + " ....")
- .fnmloan               upload_file(item, item_path, fid)
+                upload_file(item, item_path, fid)
             else:
                 if(push_needed(drive_lis[item], item_path)):
                     click.secho("updating " + item)
                     cid = get_child_id(fid, item)
- .fnmloan                               " completed", fg='yellow')
+                    update_file(item, item_path, cid)
+                    click.secho("updating of " + item +
+                                " completed", fg='yellow')
     data = drive_data()
     data[cwd]['time'] = time.time()
     drive_data(data)
