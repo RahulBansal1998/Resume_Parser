@@ -12,6 +12,8 @@ from df2gspread import df2gspread as d2g
 import numpy as np
 
 
+
+
 #Argument Parser
 def Argument_Parser():
     '''Taking arguments from user '''
@@ -63,10 +65,11 @@ def dataframe_for_Directory(Directory_Name):
         Resume_dataframe = Resume_dataframe.transpose()
         Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
         Resume_Dataframe = Resume_Dataframe.replace(np.nan,"")
-        # Resume_Dataframe = Resume_Dataframe.drop(Resume_Dataframe.columns[0],axis=1)
     return Resume_Dataframe
 
+
 def main():                                                 #main function to write to excel
+
     argument_list = Argument_Parser()                       #Argument_List
     FileName = argument_list[0]                             #FileName_Argument
     Directory_Name = argument_list[1]                       #Directory_Argument      
@@ -79,9 +82,9 @@ def main():                                                 #main function to wr
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
     client = gspread.authorize(creds)
-    sheet = client.open("MYDOC").sheet1
-    spreadsheet_key = '1yLPPaMNokmaeL0dU77Nbgn6amv-4MJmgfv7ZWK-qmeM'
-    wks_name = 'Resume_Data'
+    sheet = client.open("resume_data").sheet1
+    spreadsheet_key = '1Gvsv0KbLZn_d6TcZfJio6OcjZ3un3uLdExGzt9W5hkI'
+    wks_name = 'Resumee_Dataaaaa'
     d2g.upload(Resume_Dataframe, spreadsheet_key, wks_name, credentials=creds, row_names=True)
 
 
