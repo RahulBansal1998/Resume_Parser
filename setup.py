@@ -31,7 +31,7 @@ setup(
         'google-api-python-client==1.7.8',
         'oauth2client==4.1.3',
         'prettytable==0.7.2',
-        'httplib2==0.12.1',
+        'httplib2==0.18.0',
         'pyfiglet==0.8.post1'
     ],
     entry_points={
