@@ -14,7 +14,7 @@ def Document_to_pdf(FileName):
     when user entered doc and docx'''
     if FileName.endswith('.doc') or FileName.endswith('.docx'): 
         subprocess.call(['soffice', '--headless', '--convert-to', 'pdf','--outdir', 'PDF', FileName])       #calling subprocess
-        time.sleep(5)
+        time.sleep(4)
         FileName = FileName.split('/')[-1]
         FileName = FileName.split('.')[-2]
         FileName = "PDF/" + FileName + ".pdf"  
@@ -41,8 +41,12 @@ def dataframe_for_Directory(Directory_Name):
 
 def main():                                                 #main function to write to google sheets
     os.chdir('./drive_cli/Resumes')
-    # os.system("drive login")
-    # os.system("drive add_remote")
+    # boolean = True  
+    # if boolean:
+    #     os.system("drive login")
+    #     os.system("drive add_remote")
+    #     boolean = False
+
     os.system("drive pull")
     os.chdir('../..')
     Resume_Dataframe = dataframe_for_Directory("drive_cli/Resumes")

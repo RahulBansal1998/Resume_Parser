@@ -207,7 +207,10 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     entities =  {k: v.replace("b.tech","B.Tech") for k,v in entities.items()}         
     entities =  {k: v.replace("b.Tech","B.Tech") for k,v in entities.items()}    
     entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}    
-    entities =  {k: v.replace("Meerut in","SCRIET") for k,v in entities.items()}    
+    entities =  {k: v.replace("of experience in development","") for k,v in entities.items()}   
+    entities =  {k: v.lower() for k,v in entities.items()}    
+    entities =  {k: v.capitalize() for k,v in entities.items()}
+
 
     return entities
 
@@ -275,8 +278,6 @@ def extract_name(nlp_text, matcher):
     :return: name in strings format
     '''
 
-
-
     pattern = [cs.NAME_PATTERN]
 
     matcher.add('NAME', None, *pattern)
@@ -284,9 +285,11 @@ def extract_name(nlp_text, matcher):
     matches = matcher(nlp_text)
 
     for _, start, end in matches:
-        span = nlp_text[start:end]
+        span = nlp_text[start:end]     
         if 'name' not in span.text.lower():
-            return span.text
+            name_string = str(span.text.lower())
+            name_string = name_string.capitalize()
+            return name_string
 
 
 def extract_mobile_number(text, custom_regex=None):
@@ -448,5 +451,6 @@ def extracts_experience(text):
         experience = str(experience[0])    
     else:
         experience = ' '.join([str(elem) for elem in experience])
+
     return experience
         

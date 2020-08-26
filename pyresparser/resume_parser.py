@@ -136,8 +136,8 @@ class ResumeParser(object):
 
         #extract Total Experience
         try:
-            self.__details['Overall Experience'] = cust_ent['years of experience']                  
-        except KeyError:
+            self.__details['Overall Experience'] = cust_ent['years of Experience']                  
+        except (IndexError, KeyError):
             self.__details['Overall Experience'] = experiences
 
 
