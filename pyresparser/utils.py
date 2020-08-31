@@ -207,11 +207,10 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     entities =  {k: v.replace("b.tech","B.Tech") for k,v in entities.items()}         
     entities =  {k: v.replace("b.Tech","B.Tech") for k,v in entities.items()}    
     entities =  {k: v.replace("B.tech","B.Tech") for k,v in entities.items()}    
+    entities =  {k: v.replace("Meerut in","SCRIET") for k,v in entities.items()}    
     entities =  {k: v.replace("of experience in development","") for k,v in entities.items()}   
     entities =  {k: v.lower() for k,v in entities.items()}    
     entities =  {k: v.capitalize() for k,v in entities.items()}
-
-
     return entities
 
 

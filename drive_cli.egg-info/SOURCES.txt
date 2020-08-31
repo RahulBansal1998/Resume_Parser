@@ -7,7 +7,6 @@ drive_cli/actions.py
 drive_cli/auth.py
 drive_cli/dcli.py
 drive_cli/oauth.json
-drive_cli/setup.py
 drive_cli/utils.py
 drive_cli.egg-info/PKG-INFO
 drive_cli.egg-info/SOURCES.txt
