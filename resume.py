@@ -27,7 +27,7 @@ def dataframe_for_Directory(Directory_Name):
     Resume_Dataframe = pd.DataFrame()
     files = os.listdir(Directory_Name)
     for i in files:
-        if i.endswith('.pdf') and i in list_diff:
+        if i.endswith('.pdf'):
             i = Directory_Name + "/" + i
             Resume_Data = ResumeParser(i).get_extracted_data()                                                   #call to resume_parser file in pyresparser  
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')

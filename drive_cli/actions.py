@@ -246,7 +246,55 @@ def list_out():
         page_token = children.get('nextPageToken', None)
         if page_token is None:
             break
+        
     print(t)
+
+def lists_out():
+    """
+    ls: Print files belonging to a folder in the drive folder of the current directory
+    """
+    os.chdir('./drive_cli/Resumes')
+    cwd = os.getcwd()
+    utils.save_history([{}, "", cwd])
+    data = utils.drive_data()
+    token = os.path.join(dirpath, 'token.json')
+    store = file.Storage(token)
+    creds = store.get()
+    service = build('drive', 'v3', http=creds.authorize(Http()))
+    page_token = None
+    if cwd not in data.keys():
+        click.secho(
+            "following directoryy has not been tracked: \nuse drive add_remote or drive clone", fg='red')
+        sys.exit(0)
+    query = "'" + data[cwd]['id'] + "' in parents"
+    click.secho('listing down files in drive ....', fg='magenta')
+    t = PrettyTable(['Name', 'File ID', 'Type'])
+    while True:
+        children = service.files().list(q=query,
+                                        spaces='drive',
+                                        fields='nextPageToken, files(id,mimeType,name)',
+                                        pageToken=page_token
+                                        ).execute()
+        for child in children.get('files', []):
+            t.add_row([child.get('name')[:2500], child.get(
+                'id'), child.get('mimeType')])
+        page_token = children.get('nextPageToken', None)
+        if page_token is None:
+            break
+    
+
+    raw = t.get_string()
+    data = [tuple(filter(None, map(str.strip, splitline)))
+            for line in raw.splitlines()
+            for splitline in [line.split('|')] if len(splitline) > 1]
+
+    os.chdir('../../pyresparser/')
+    with open('drive_table.csv', 'w') as f:
+        for d in data:
+            f.write('{}\n'.format(','.join(d)))
+
+    os.chdir('../')
+    return 
 
 
 @click.command('cat', short_help='view contents of the file using its file id or sharing link')

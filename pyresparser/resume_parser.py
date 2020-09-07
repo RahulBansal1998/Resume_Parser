@@ -50,6 +50,7 @@ class ResumeParser(object):
             'Remarks':None,            
         }
         self.__resume = resume
+        self.__file = self.__resume
         if not isinstance(self.__resume, io.BytesIO):
             ext = os.path.splitext(self.__resume)[1].split('.')[1]
         else:
@@ -85,13 +86,18 @@ class ResumeParser(object):
                     self.__nlp,
                     self.__noun_chunks
                 )
-        
         Location = utils.extract_location(
                     self.__nlp,
                     self.__noun_chunks
                 )
 
         entities = utils.extract_entity_sections_grad(self.__text_raw)
+
+        resume_link = utils.resume_link(self.__file)
+
+        self.__details['Resume ID'] = resume_link
+        
+
 
         # extract name
         try:
@@ -136,7 +142,7 @@ class ResumeParser(object):
 
         #extract Total Experience
         try:
-            self.__details['Overall Experience'] = cust_ent['years of Experience']                  
+            self.__details['Overall Experience'] = cust_ent['Years of Experience']                  
         except (IndexError, KeyError):
             self.__details['Overall Experience'] = experiences
 

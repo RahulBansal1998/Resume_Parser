@@ -15,12 +15,34 @@ from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfparser import PDFSyntaxError
-from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from collections import Counter
-import itertools 
+import itertools
+import sys
+sys.path.append('../drive_cli')
+from drive_cli import actions
 
 
+def resume_link(filename):
+    filename = filename.split('/')[-1]
+    default_string = "https://drive.google.com/file/d/"
+    doc_list = os.listdir('./drive_cli/Resumes')
+    actions.lists_out()
+    df = pd.read_csv('pyresparser/drive_table.csv')
+    docs_list =[]
+    for i in doc_list:
+        if i.endswith('.doc') or i.endswith('.docx'):
+            docs_list.append(i)
+    try:
+        # file_link = ""
+        # for i in docs_list:
+        #     ids = df.loc[df['Name'] == i ,'File ID'].values[0]
+        #     file_link = default_string + ids
+        id = df.loc[df['Name'] == filename ,'File ID'].values[0]
+        file_link = default_string + id
+        return file_link
+    except :
+        return None
 
 def extract_text_from_pdf(pdf_path):
     '''
