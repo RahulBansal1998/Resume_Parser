@@ -29,11 +29,13 @@ def dataframe_for_Directory(Directory_Name):
     for i in files:
         if i.endswith('.pdf'):
             i = Directory_Name + "/" + i
+            print (i)
             Resume_Data = ResumeParser(i).get_extracted_data()                                                   #call to resume_parser file in pyresparser  
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
             Resume_dataframe = Resume_dataframe.transpose()
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
             Resume_Dataframe = Resume_Dataframe.replace(np.nan,"")
+
 
     return Resume_Dataframe
 
@@ -44,7 +46,7 @@ def doc_to_pdf(cli_dir):
     files = os.listdir(cli_dir)
     os.chdir(cli_dir)
     for i in files :
-        if i.endswith('.doc') or i.endswith('.docx') and i in list_diff:
+        if i.endswith('.doc') or i.endswith('.docx'):
             Document_to_pdf(i)
 
 

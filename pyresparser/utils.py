@@ -25,24 +25,16 @@ from drive_cli import actions
 
 def resume_link(filename):
     filename = filename.split('/')[-1]
+    filename1 = filename.split('.')[0] + ".doc"
+    filename2 = filename.split('.')[0] + ".docx"
     default_string = "https://drive.google.com/file/d/"
     doc_list = os.listdir('./drive_cli/Resumes')
     actions.lists_out()
     df = pd.read_csv('pyresparser/drive_table.csv')
-    docs_list =[]
-    for i in doc_list:
-        if i.endswith('.doc') or i.endswith('.docx'):
-            docs_list.append(i)
-    try:
-        # file_link = ""
-        # for i in docs_list:
-        #     ids = df.loc[df['Name'] == i ,'File ID'].values[0]
-        #     file_link = default_string + ids
-        id = df.loc[df['Name'] == filename ,'File ID'].values[0]
-        file_link = default_string + id
-        return file_link
-    except :
-        return None
+    id = df.loc[(df['Name'] == filename) | (df['Name'] == filename1) | (df['Name'] == filename2) ,'File ID'].values[0]
+    file_link = default_string + id
+    return file_link
+
 
 def extract_text_from_pdf(pdf_path):
     '''
