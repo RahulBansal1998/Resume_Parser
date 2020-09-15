@@ -38,7 +38,7 @@ def doc_documents():
     list_of_files=os.listdir('./drive_cli/Resumes')
     documents_list = []
     for i in list_of_files:
-        if i.endswith('.pdf'):
+        if i.endswith('.doc') or i.endswith('.docx'):
             documents_list.append(i)
 
 

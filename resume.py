@@ -27,26 +27,25 @@ def dataframe_for_Directory(Directory_Name):
     Resume_Dataframe = pd.DataFrame()
     files = os.listdir(Directory_Name)
     for i in files:
-        if i.endswith('.pdf'):
+        if i.endswith('.pdf') and i in list_diff:
             i = Directory_Name + "/" + i
-            print (i)
             Resume_Data = ResumeParser(i).get_extracted_data()                                                   #call to resume_parser file in pyresparser  
             Resume_dataframe = pd.DataFrame.from_dict(Resume_Data ,orient='index')
             Resume_dataframe = Resume_dataframe.transpose()
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
             Resume_Dataframe = Resume_Dataframe.replace(np.nan,"")
 
-
+    print(Resume_Dataframe)
     return Resume_Dataframe
 
 
 def doc_to_pdf(cli_dir):
-    doc_list = file_tracker.pdf_documents()
-    list_diff = (list(list(set(doc_list[0])-set(doc_list[1])) + list(set(doc_list[1])-set(doc_list[0])))) 
+    doc_list = file_tracker.doc_documents()
+    list_diffs = (list(list(set(doc_list[0])-set(doc_list[1])) + list(set(doc_list[1])-set(doc_list[0])))) 
     files = os.listdir(cli_dir)
     os.chdir(cli_dir)
     for i in files :
-        if i.endswith('.doc') or i.endswith('.docx'):
+        if i.endswith('.doc') or i.endswith('.docx') and i in list_diffs:
             Document_to_pdf(i)
 
 
