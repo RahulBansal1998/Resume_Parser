@@ -9,7 +9,7 @@ from prettytable import PrettyTable
 from googleapiclient.discovery import build
 from prettytable import MSWORD_FRIENDLY
 from mimetypes import MimeTypes
-
+sys.path.append('../')
 
 dirpath = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dirpath)
@@ -249,11 +249,11 @@ def list_out():
         
     print(t)
 
-def lists_out():
+def lists_out(arguments_data):
     """
     ls: Print files belonging to a folder in the drive folder of the current directory
     """
-    os.chdir('./drive_cli/Resumes')
+    os.chdir(arguments_data["Directory"])
     cwd = os.getcwd()
     utils.save_history([{}, "", cwd])
     data = utils.drive_data()
@@ -289,7 +289,7 @@ def lists_out():
             for splitline in [line.split('|')] if len(splitline) > 1]
 
     os.chdir('../../pyresparser/')
-    with open('drive_table.csv', 'w') as f:
+    with open(arguments_data["drive_table"][1], 'w') as f:
         for d in data:
             f.write('{}\n'.format(','.join(d)))
 

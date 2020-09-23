@@ -6,4 +6,5 @@ __all__ = [
     'utils',
     'constants',
     'ResumeParser'
+    
 ]

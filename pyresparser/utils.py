@@ -20,17 +20,24 @@ from collections import Counter
 import itertools
 import sys
 sys.path.append('../drive_cli')
+sys.path.append('..')
+import run_resume
 from drive_cli import actions
 
 
+def argument_data():
+    argumnets = run_resume.argument_parser()
+    return argumnets
+
 def resume_link(filename):
+    arguments_data = argument_data()
     filename = filename.split('/')[-1]
     filename1 = filename.split('.')[0] + ".doc"
     filename2 = filename.split('.')[0] + ".docx"
     default_string = "https://drive.google.com/file/d/"
-    doc_list = os.listdir('./drive_cli/Resumes')
-    actions.lists_out()
-    df = pd.read_csv('pyresparser/drive_table.csv')
+    doc_list = os.listdir(arguments_data["Directory"])
+    actions.lists_out(arguments_data)
+    df = pd.read_csv(arguments_data["drive_table"][0])
     id = df.loc[(df['Name'] == filename) | (df['Name'] == filename1) | (df['Name'] == filename2) ,'File ID'].values[0]
     file_link = default_string + id
     return file_link

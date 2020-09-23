@@ -5,7 +5,7 @@ import spacy
 import pprint
 from spacy.matcher import Matcher
 from . import utils
-
+import sys
 
 class ResumeParser(object):
     ''' Main class to define 

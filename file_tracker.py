@@ -1,5 +1,10 @@
 import os
 import pandas as pd
+import run_resume
+
+
+
+run_resume.argument_parser()
 # list_of_files=os.listdir('./drive_cli/Resumes')
 # document_list = []
 # for i in list_of_files:
