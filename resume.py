@@ -8,6 +8,7 @@ import numpy as np
 import googlesheets
 import glob
 import file_tracker
+from drive_cli import actions
 
 
 def Document_to_pdf(FileName):
@@ -52,7 +53,8 @@ def drive_pull(arguments_data):
     os.chdir(arguments_data["Directory"])
     # os.system("drive login")
     # os.system("drive add_remote")
-    os.system("drive pull")
+    actions.pulls()
+    # os.system("drive pull")
     os.chdir(arguments_data["root"])
 
 
