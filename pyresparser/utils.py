@@ -21,13 +21,13 @@ import itertools
 import sys
 sys.path.append('../drive_cli')
 sys.path.append('..')
-import run_resume
+import gem_resume_parser
 from drive_cli import actions
 
 
 def argument_data():
     ''' getting arguments '''
-    argumnets = run_resume.argument_parser()
+    argumnets = gem_resume_parser.argument_parser()
     return argumnets
 
 def resume_link(filename):

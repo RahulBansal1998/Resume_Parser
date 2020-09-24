@@ -351,7 +351,6 @@ def pulls(arguments_data):
             "following directory has not been tracked: \nuse drive add_remote or drive clone ", fg='red')
         sys.exit(0)
     fid = data[cwd]['id']
-    print("fid",fid)
     current_root = utils.get_file(fid)
     click.secho("checking for changes in '" +
                 current_root['name'] + "' ....", fg='magenta')

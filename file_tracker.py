@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-import run_resume
+import gem_resume_parser
 
 
 
@@ -22,7 +22,7 @@ import run_resume
 
 def pdf_documents():
     ''' tracking pdf documents by using pdf_file.csv'''
-    arguments = run_resume.argument_parser()
+    arguments = gem_resume_parser.argument_parser()
     files=pd.read_csv(arguments["file_tracker"][0])
     list_of_files=os.listdir(arguments["Directory"])
     document_list = []
@@ -31,8 +31,7 @@ def pdf_documents():
             document_list.append(i)
 
 
-    if len(files.files)!=len(document_list):
-            #save again the curent list of files 
+    if len(files.files)!=len(document_list):                                                    #save again the curent list of files 
         pd.DataFrame({'files':document_list}).to_csv(arguments["file_tracker"][0])
 
     document_init_list = files.files.values.tolist()
@@ -41,7 +40,7 @@ def pdf_documents():
 
 def doc_documents():
     ''' tracking doc_documents by using doc_file.csv'''
-    arguments = run_resume.argument_parser()
+    arguments = gem_resume_parser.argument_parser()
     doc_files=pd.read_csv(arguments["file_tracker"][1])
     list_of_files=os.listdir(arguments["Directory"])
     documents_list = []
@@ -50,8 +49,7 @@ def doc_documents():
             documents_list.append(i)
 
 
-    if len(doc_files.files)!=len(documents_list):
-            #save again the curent list of files 
+    if len(doc_files.files)!=len(documents_list):                                   #save again the curent list of files 
         pd.DataFrame({'files':documents_list}).to_csv(arguments["file_tracker"][1])
 
     documents_init_list = doc_files.files.values.tolist()
