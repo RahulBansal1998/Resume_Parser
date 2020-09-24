@@ -26,10 +26,14 @@ from drive_cli import actions
 
 
 def argument_data():
+    ''' getting arguments '''
     argumnets = run_resume.argument_parser()
     return argumnets
 
 def resume_link(filename):
+    ''' 
+    function for getting resume_link 
+    '''
     arguments_data = argument_data()
     filename = filename.split('/')[-1]
     filename1 = filename.split('.')[0] + ".doc"
@@ -461,8 +465,8 @@ def cleanup(token, lower=True):
 
 def extracts_experience(text):
     '''
-    text simple plan text in simple form
-    uses regex to extract text
+    :param text : simple plan text in string format
+     uses regex to extract text
     '''
     text = text.lower()
     pattern = r"\d+\s+years?\s+(?:and\s*)?\d+\s+months?|\d+\s+(?:months?|years?)"

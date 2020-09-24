@@ -12,18 +12,22 @@ from drive_cli import actions
 
 
 def Document_to_pdf(FileName):
-    ''' converting to pdf 
-        when user entered
-         doc and docx '''
-    print("doc_to_pdf")
+    '''
+    :param : filename to be converted to pdf 
+     converting to pdf when user entered doc and docx 
+    '''
     if FileName.endswith('.doc') or FileName.endswith('.docx'): 
         subprocess.call(['soffice', '--headless', '--convert-to', 'pdf', FileName])                     #calling subprocess
         time.sleep(4)
   
 def dataframe_for_Directory(arguments_data):
+    '''
+    :param:json parameter
+     creating dataframe for writing to the google sheet 
+    '''
     Directory_Name = arguments_data["Directory"]
     pdf_list = file_tracker.pdf_documents()
-    list_diff = (list(list(set(pdf_list[0])-set(pdf_list[1])) + list(set(pdf_list[1])-set(pdf_list[0])))) 
+    list_diff = (list(list(set(pdf_list[0])-set(pdf_list[1])) + list(set(pdf_list[1])-set(pdf_list[0])))) #calculating list diff 
     Resume_Dataframe = pd.DataFrame()
     files = os.listdir(Directory_Name)
     for i in files:
@@ -35,7 +39,6 @@ def dataframe_for_Directory(arguments_data):
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
             Resume_Dataframe = Resume_Dataframe.replace(np.nan,"")
 
-    print (Resume_Dataframe)
     return Resume_Dataframe
 
 
@@ -50,20 +53,26 @@ def doc_to_pdf(cli_dir):
 
 
 def drive_pull(arguments_data):
+    '''
+    :param : json argument_data for mapping
+     function for pulling data from drive 
+    '''
     os.chdir(arguments_data["Directory"])
     # os.system("drive login")
     # os.system("drive add_remote")
-    actions.pulls()
-    # os.system("drive pull")
+    actions.pulls(arguments_data)
     os.chdir(arguments_data["root"])
 
 
 def main(arguments_data): 
+    ''' main function getting arguments
+        from run_resume.py file 
+    '''
     drive_pull(arguments_data)
     doc_to_pdf(arguments_data["Directory"])
     os.chdir(arguments_data["root"])
     Resume_Dataframe = dataframe_for_Directory(arguments_data)
-    googlesheets.sheets_upload(Resume_Dataframe,arguments_data)
+    googlesheets.sheets_upload(Resume_Dataframe,arguments_data)    # calling google sheet
 
 
     

@@ -255,8 +255,8 @@ def lists_out(arguments_data):
     """
     os.chdir(arguments_data["Directory"])
     cwd = os.getcwd()
-    utils.save_history([{}, "", cwd])
-    data = utils.drive_data()
+    utils.save_history([{}, "", cwd],arguments_data)
+    data = utils.drive_data(arguments_data)
     token = os.path.join(dirpath, 'token.json')
     store = file.Storage(token)
     creds = store.get()
@@ -329,7 +329,7 @@ def pull():
     data = utils.drive_data()
     if cwd not in data.keys():
         click.secho(
-            "following directory has not been tracked: \nuse drive add_remote or drive clone ", fg='red')
+            "following directory has not been tracked: \n use drive add_remote or drive clone ", fg='red')
         sys.exit(0)
     fid = data[cwd]['id']
     current_root = utils.get_file(fid)
@@ -342,19 +342,20 @@ def pull():
 
 
 
-def pulls():
+def pulls(arguments_data):
     cwd = os.getcwd()
-    utils.save_history([{}, "", cwd])
-    data = utils.drive_data()
+    utils.save_history([{}, "", cwd],arguments_data)
+    data = utils.drive_data(arguments_data)
     if cwd not in data.keys():
         click.secho(
             "following directory has not been tracked: \nuse drive add_remote or drive clone ", fg='red')
         sys.exit(0)
     fid = data[cwd]['id']
+    print("fid",fid)
     current_root = utils.get_file(fid)
     click.secho("checking for changes in '" +
                 current_root['name'] + "' ....", fg='magenta')
-    utils.pull_content(cwd, fid)
+    utils.pull_content(cwd, fid,arguments_data)
     click.secho(current_root['name'] +
                 " is up to date with drive", fg='yellow')
 

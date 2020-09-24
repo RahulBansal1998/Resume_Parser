@@ -3,7 +3,7 @@ import argparse
 import resume
 
 def argument_parser():
-    '''Taking JSON Argument'''
+    '''Taking JSON Argument from user'''
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", help = "json file") 
     args = parser.parse_args() 

@@ -19,8 +19,8 @@ dirpath = os.path.dirname(os.path.realpath(__file__))
 mime = MimeTypes()
 
 
-def get_history():
-    hist_path = os.path.join(dirpath, '.history')
+def get_history(arguments_data):
+    hist_path = os.path.join(dirpath, arguments_data["history"][0])
     if not os.path.isfile(hist_path):
         with open(hist_path, 'w')as outfile:
             history = {}
@@ -31,7 +31,7 @@ def get_history():
     return history
 
 
-def save_history(info):
+def save_history(info, arguments_data):
     date_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S").split(" ")
     date = date_time[0]
     time = date_time[1]
@@ -41,8 +41,8 @@ def save_history(info):
            "arg": info[1],
            "flags": info[0]
            }
-    hist_path = os.path.join(dirpath, '.history')
-    history = get_history()
+    hist_path = os.path.join(dirpath, arguments_data["history"][0])
+    history = get_history(arguments_data)
     if not (date in history):
         history[date] = {}
     history[date][time] = log
@@ -59,8 +59,8 @@ def go_back(picker):
     return None, -1
 
 
-def drive_data(*argv):
-    dclipath = os.path.join(dirpath, '.drivecli')
+def drive_data(arguments_data,*argv):
+    dclipath = os.path.join(dirpath, arguments_data["history"][1])
     if not os.path.isfile(dclipath):
         with open(dclipath, 'w')as outfile:
             if(not len(argv)):
@@ -145,11 +145,11 @@ def get_request(service, fid, mimeType):
         return request, ""
 
 
-def write_needed(dir_name, item):
+def write_needed(dir_name, item,arguments_data):
     drive_time = time.mktime(time.strptime(
         item['modifiedTime'], '%Y-%m-%dT%H:%M:%S.%fZ')) + float(19800.00)
     local_time = os.path.getmtime(dir_name)
-    data = drive_data()
+    data = drive_data(arguments_data)
     sync_time = data[dir_name]['time']
     if(sync_time < drive_time):
         if(sync_time < local_time):
@@ -305,7 +305,7 @@ def create_dir(cwd, pid, name):
     return full_path, fid['id']
 
 
-def file_download(item, cwd, clone=False):
+def file_download(arguments_data,item, cwd, clone=False):
     token = os.path.join(dirpath, 'token.json')
     store = file.Storage(token)
     creds = store.get()
@@ -316,7 +316,7 @@ def file_download(item, cwd, clone=False):
     click.echo("Preparing: " + click.style(fname, fg='red') + " for download")
     request, ext = get_request(service, fid, item['mimeType'])
     file_path = (os.path.join(cwd, fname) + ext)
-    if(not clone and (os.path.exists(file_path)) and (not write_needed(file_path, item))):
+    if(not clone and (os.path.exists(file_path)) and (not write_needed(file_path, item,arguments_data))):
         return
     downloader = MediaIoBaseDownload(fh, request)
     done = False
@@ -329,9 +329,9 @@ def file_download(item, cwd, clone=False):
             pstatus = status
         with open(file_path, 'wb') as f:
             f.write(fh.getvalue())
-    data = drive_data()
+    data = drive_data(arguments_data)
     data[file_path] = {'id': item['id'], 'time': time.time()}
-    drive_data(data)
+    drive_data(arguments_data,data)
     click.secho("completed download of " + fname, fg='yellow')
 
 
@@ -396,8 +396,8 @@ def update_file(name, path, fid):
     return new_file
 
 
-def pull_content(cwd, fid):
-    data = drive_data()
+def pull_content(cwd, fid,arguments_data):
+    data = drive_data(arguments_data)
     token = os.path.join(dirpath, 'token.json')
     store = file.Storage(token)
     creds = store.get()
@@ -419,22 +419,22 @@ def pull_content(cwd, fid):
     for item in lis:
         dir_name = os.path.join(cwd, item['name'])
         if(item['mimeType'] != 'application/vnd.google-apps.folder'):
-            if((not os.path.exists(dir_name)) or write_needed(dir_name, item)):
-                file_download(item, cwd, data[cwd]['time'])
+            if((not os.path.exists(dir_name)) or write_needed(dir_name, item,arguments_data)):
+                file_download(arguments_data,item, cwd, data[cwd]['time'])
         else:
             if(not os.path.exists(dir_name)):
                 click.secho("creating: " + dir_name)
                 os.mkdir(dir_name)
-                data = drive_data()
+                data = drive_data(arguments_data)
                 data[dir_name] = {'id': item['id'], 'time': time.time()}
-                data = drive_data(data)
+                data = drive_data(arguments_data,data)
             else:
                 click.secho("updating: " + dir_name)
             pull_content(dir_name, item['id'])
-    data = drive_data()
+    data = drive_data(arguments_data)
     data[cwd]['time'] = time.time()
-    data = drive_data(data)
-    drive_data(data)
+    data = drive_data(arguments_data,data)
+    drive_data(arguments_data,data)
 
 
 def list_local(cwd):

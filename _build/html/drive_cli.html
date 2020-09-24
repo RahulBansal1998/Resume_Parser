@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>drive_cli package &mdash; Resume_Parser  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="file_tracker module" href="file_tracker.html" />
+    <link rel="prev" title="conf module" href="conf.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Resume_Parser
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Resume_Parser</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="conf.html">conf module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">drive_cli package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-drive_cli.actions">drive_cli.actions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-drive_cli.auth">drive_cli.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-drive_cli.dcli">drive_cli.dcli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-drive_cli.utils">drive_cli.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-drive_cli">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_tracker.html">file_tracker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="googlesheets.html">googlesheets module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyresparser.html">pyresparser package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resume.html">resume module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_resume.html">run_resume module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">setup module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Resume_Parser</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">Resume_Parser</a> &raquo;</li>
+        
+      <li>drive_cli package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/drive_cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="drive-cli-package">
+<h1>drive_cli package<a class="headerlink" href="#drive-cli-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-drive_cli.actions">
+<span id="drive-cli-actions-module"></span><h2>drive_cli.actions module<a class="headerlink" href="#module-drive_cli.actions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="drive_cli.actions.lists_out">
+<code class="descclassname">drive_cli.actions.</code><code class="descname">lists_out</code><span class="sig-paren">(</span><em>arguments_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/actions.html#lists_out"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.actions.lists_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>ls: Print files belonging to a folder in the drive folder of the current directory</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.actions.pulls">
+<code class="descclassname">drive_cli.actions.</code><code class="descname">pulls</code><span class="sig-paren">(</span><em>arguments_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/actions.html#pulls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.actions.pulls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-drive_cli.auth">
+<span id="drive-cli-auth-module"></span><h2>drive_cli.auth module<a class="headerlink" href="#module-drive_cli.auth" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="drive_cli.auth.login">
+<code class="descclassname">drive_cli.auth.</code><code class="descname">login</code><span class="sig-paren">(</span><em>remote</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/auth.html#login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.auth.login" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-drive_cli.dcli">
+<span id="drive-cli-dcli-module"></span><h2>drive_cli.dcli module<a class="headerlink" href="#module-drive_cli.dcli" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-drive_cli.utils">
+<span id="drive-cli-utils-module"></span><h2>drive_cli.utils module<a class="headerlink" href="#module-drive_cli.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="drive_cli.utils.clear_history">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">clear_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#clear_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.clear_history" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.concat">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">concat</code><span class="sig-paren">(</span><em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#concat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.concat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.create_dir">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">create_dir</code><span class="sig-paren">(</span><em>cwd</em>, <em>pid</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#create_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.create_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.create_new">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">create_new</code><span class="sig-paren">(</span><em>cwd</em>, <em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#create_new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.create_new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.delete_file">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">delete_file</code><span class="sig-paren">(</span><em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#delete_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.delete_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.drive_data">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">drive_data</code><span class="sig-paren">(</span><em>arguments_data</em>, <em>*argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#drive_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.drive_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.file_download">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">file_download</code><span class="sig-paren">(</span><em>arguments_data</em>, <em>item</em>, <em>cwd</em>, <em>clone=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#file_download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.file_download" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.get_child">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">get_child</code><span class="sig-paren">(</span><em>cwd</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#get_child"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.get_child" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.get_child_id">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">get_child_id</code><span class="sig-paren">(</span><em>pid</em>, <em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#get_child_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.get_child_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.get_fid">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">get_fid</code><span class="sig-paren">(</span><em>inp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#get_fid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.get_fid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.get_file">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">get_file</code><span class="sig-paren">(</span><em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#get_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.get_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.get_history">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">get_history</code><span class="sig-paren">(</span><em>arguments_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#get_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.get_history" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.get_request">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">get_request</code><span class="sig-paren">(</span><em>service</em>, <em>fid</em>, <em>mimeType</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#get_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.get_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.go_back">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">go_back</code><span class="sig-paren">(</span><em>picker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#go_back"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.go_back" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.identify_mimetype">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">identify_mimetype</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#identify_mimetype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.identify_mimetype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.list_local">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">list_local</code><span class="sig-paren">(</span><em>cwd</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#list_local"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.list_local" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.list_status">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">list_status</code><span class="sig-paren">(</span><em>cwd</em>, <em>sync_time</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#list_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.list_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.modified_or_created">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">modified_or_created</code><span class="sig-paren">(</span><em>sync_time</em>, <em>item_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#modified_or_created"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.modified_or_created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.pull_content">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">pull_content</code><span class="sig-paren">(</span><em>cwd</em>, <em>fid</em>, <em>arguments_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#pull_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.pull_content" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.push_content">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">push_content</code><span class="sig-paren">(</span><em>cwd</em>, <em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#push_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.push_content" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.push_needed">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">push_needed</code><span class="sig-paren">(</span><em>drive</em>, <em>item_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#push_needed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.push_needed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.save_history">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">save_history</code><span class="sig-paren">(</span><em>info</em>, <em>arguments_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#save_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.save_history" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.update_file">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">update_file</code><span class="sig-paren">(</span><em>name</em>, <em>path</em>, <em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#update_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.update_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.upload_file">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">upload_file</code><span class="sig-paren">(</span><em>name</em>, <em>path</em>, <em>pid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#upload_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.upload_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="drive_cli.utils.write_needed">
+<code class="descclassname">drive_cli.utils.</code><code class="descname">write_needed</code><span class="sig-paren">(</span><em>dir_name</em>, <em>item</em>, <em>arguments_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/drive_cli/utils.html#write_needed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drive_cli.utils.write_needed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-drive_cli">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-drive_cli" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_tracker.html" class="btn btn-neutral float-right" title="file_tracker module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="conf.html" class="btn btn-neutral float-left" title="conf module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Rahul Bansal
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

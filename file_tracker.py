@@ -4,7 +4,6 @@ import run_resume
 
 
 
-arguments = run_resume.argument_parser()
 # list_of_files=os.listdir('./drive_cli/Resumes')
 # document_list = []
 # for i in list_of_files:
@@ -22,6 +21,8 @@ arguments = run_resume.argument_parser()
 # pd.DataFrame({'files':documents_list}).to_csv('doc_file.csv')
 
 def pdf_documents():
+    ''' tracking pdf documents by using pdf_file.csv'''
+    arguments = run_resume.argument_parser()
     files=pd.read_csv(arguments["file_tracker"][0])
     list_of_files=os.listdir(arguments["Directory"])
     document_list = []
@@ -39,6 +40,8 @@ def pdf_documents():
     return document_lists
 
 def doc_documents():
+    ''' tracking doc_documents by using doc_file.csv'''
+    arguments = run_resume.argument_parser()
     doc_files=pd.read_csv(arguments["file_tracker"][1])
     list_of_files=os.listdir(arguments["Directory"])
     documents_list = []

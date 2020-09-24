@@ -3,8 +3,11 @@ import pandas as pd
 from pygsheets.datarange import DataRange
 import csv
 
-
 def sheets_upload(Resume_Dataframe,arguments_data):
+    ''' 
+    Resume_Dataframe : Dataframe to be write
+    argument_data : json argument for mapping 
+    '''
     client = pygsheets.authorize(service_account_file='client_secret.json')
     sheet = client.open(arguments_data["sheets"][0])
     wks = sheet.worksheet_by_title(arguments_data["sheets"][1])
@@ -17,13 +20,12 @@ def sheets_upload(Resume_Dataframe,arguments_data):
     wks.adjust_column_width(start=17, end=18, pixel_size=450)
     wks.adjust_column_width(start=19, end=23, pixel_size=200)   
     DataRange('A1','Y1', worksheet=wks).apply_format(model_cell)
-
+    
     with open(arguments_data["sheets"][2]) as f1:
         reader = csv.reader(f1)
         data = list(reader)
-    
-    val = [ i for row in data for i in row]
 
+    val = [ i for row in data for i in row]
     val = int(val[0])
     if val == 0:
         wks.set_dataframe(Resume_Dataframe, start=(1,1), copy_index=False, fit=False)
