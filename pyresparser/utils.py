@@ -21,20 +21,12 @@ import itertools
 import sys
 sys.path.append('../drive_cli')
 sys.path.append('..')
-import gem_resume_parser
 from drive_cli import actions
 
-
-def argument_data():
-    ''' getting arguments '''
-    argumnets = gem_resume_parser.argument_parser()
-    return argumnets
-
-def resume_link(filename):
+def resume_link(filename,arguments_data):
     ''' 
     function for getting resume_link 
     '''
-    arguments_data = argument_data()
     filename = filename.split('/')[-1]
     filename1 = filename.split('.')[0] + ".doc"
     filename2 = filename.split('.')[0] + ".docx"

@@ -9,11 +9,13 @@ def argument_parser():
     args = parser.parse_args() 
     with open(args.file) as json_data:
         data = json.load(json_data)
+    
     return data
 
 def main():
     arguments_data = argument_parser()
-    resumes_parser.main(arguments_data)
+    for i in arguments_data.keys():
+        resumes_parser.main(arguments_data[i])
 
 if __name__ == "__main__":
     main()

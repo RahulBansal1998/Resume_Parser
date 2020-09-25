@@ -15,6 +15,7 @@ class ResumeParser(object):
     def __init__(
         self,
         resume,
+        arguments,
         skills_file=None,
         custom_regex=None
     ):
@@ -50,6 +51,7 @@ class ResumeParser(object):
             'Remarks':None,            
         }
         self.__resume = resume
+        self.__argument = arguments
         self.__file = self.__resume
         if not isinstance(self.__resume, io.BytesIO):
             ext = os.path.splitext(self.__resume)[1].split('.')[1]
@@ -62,7 +64,7 @@ class ResumeParser(object):
         self.__noun_chunks = list(self.__nlp.noun_chunks)
         self.__get_basic_details()
 
-    def get_extracted_data(self):   #function calling from resume.py file
+    def get_extracted_data(self):                                       #function calling from resume.py file
         return self.__details
     
     def get_extracted_text(self):
@@ -93,7 +95,7 @@ class ResumeParser(object):
 
         entities = utils.extract_entity_sections_grad(self.__text_raw)
 
-        resume_link = utils.resume_link(self.__file)
+        resume_link = utils.resume_link(self.__file,self.__argument)
 
         self.__details['Resume ID'] = resume_link
         

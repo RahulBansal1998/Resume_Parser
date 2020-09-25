@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-import gem_resume_parser
 
 
 
@@ -20,9 +19,8 @@ import gem_resume_parser
 
 # pd.DataFrame({'files':documents_list}).to_csv('doc_file.csv')
 
-def pdf_documents():
+def pdf_documents(arguments):
     ''' tracking pdf documents by using pdf_file.csv'''
-    arguments = gem_resume_parser.argument_parser()
     files=pd.read_csv(arguments["file_tracker"][0])
     list_of_files=os.listdir(arguments["Directory"])
     document_list = []
@@ -38,9 +36,8 @@ def pdf_documents():
     document_lists = [document_list,document_init_list]
     return document_lists
 
-def doc_documents():
+def doc_documents(arguments):
     ''' tracking doc_documents by using doc_file.csv'''
-    arguments = gem_resume_parser.argument_parser()
     doc_files=pd.read_csv(arguments["file_tracker"][1])
     list_of_files=os.listdir(arguments["Directory"])
     documents_list = []
