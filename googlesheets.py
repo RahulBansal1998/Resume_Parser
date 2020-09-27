@@ -27,14 +27,20 @@ def sheets_upload(Resume_Dataframe,arguments_data):
 
     val = [ i for row in data for i in row]
     val = int(val[0])
-    if val == 0:
-        wks.set_dataframe(Resume_Dataframe, start=(1,1), copy_index=False, fit=False)
-    if val!=0:
-        wks.set_dataframe(Resume_Dataframe, start=(val+1,1), copy_index=False,copy_head=False)
-    val= val + Resume_Dataframe.shape[0]
-    val = str(val)
-    with open(arguments_data["sheets"][2], 'w') as f:
-        f.write(val)
+    try:
+        if val == 0:
+            wks.set_dataframe(Resume_Dataframe, start=(1,1), copy_index=False, fit=False)
+            print("succesfully inserted to", arguments_data["sheets"][0] , "Sheets with sheet reference", arguments_data["sheets"][1])
+        if val!=0:
+            wks.set_dataframe(Resume_Dataframe, start=(val+1,1), copy_index=False,copy_head=False)
+            print("succesfully inserted to", arguments_data["sheets"][0] , "Sheets with sheet reference", arguments_data["sheets"][1])
+        val= val + Resume_Dataframe.shape[0]
+        val = str(val)
+        with open(arguments_data["sheets"][2], 'w') as f:
+            f.write(val)
+    except:
+        print("please insert new files to The Folder")
+
 
 
 

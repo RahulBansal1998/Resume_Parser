@@ -20,6 +20,29 @@
                 ".history",
                 ".drivecli"
             ]
+        },
+
+        "Kritika_PYTHON2":{
+            "Directory": "./drive_cli/Python_Resumes",
+            "root": "../../",
+            "sheets": [
+                "MYDOC",
+                "Sheet24",
+                "sheet/sheet_python.csv"
+            ],
+            "drive_table": [
+                "pyresparser/Drive_Table/drive_table_python.csv",
+                "Drive_Table/drive_table_python.csv"
+            ],
+            "file_tracker": [
+                "pdf_file_tracker/pdf_file_python.csv",
+                "doc_file_tracker/doc_file_python.csv"
+            ],
+            "history": [
+                ".pythonhistory",
+                ".pythondrivecli"
+            ]
         }
+
     
 }

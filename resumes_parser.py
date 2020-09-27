@@ -38,7 +38,9 @@ def dataframe_for_Directory(arguments_data):
             Resume_dataframe = Resume_dataframe.transpose()
             Resume_Dataframe = Resume_Dataframe.append(Resume_dataframe, ignore_index=True)                      #appending all resumedataframe into main
             Resume_Dataframe = Resume_Dataframe.replace(np.nan,"")
+    
 
+    print(Resume_Dataframe)
     return Resume_Dataframe
 
 
