@@ -30,7 +30,6 @@ def sheets_upload(Resume_Dataframe,arguments_data):
     try:
         if val == 0:
             wks.set_dataframe(Resume_Dataframe, start=(1,1), copy_index=False, fit=False)
-            print("succesfully inserted to", arguments_data["sheets"][0] , "Sheets with sheet reference", arguments_data["sheets"][1])
         if val!=0:
             wks.set_dataframe(Resume_Dataframe, start=(val+1,1), copy_index=False,copy_head=False)
             print("succesfully inserted to", arguments_data["sheets"][0] , "Sheets with sheet reference", arguments_data["sheets"][1])

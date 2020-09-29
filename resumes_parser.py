@@ -52,6 +52,7 @@ def doc_to_pdf(arguments_data):
     os.chdir(cli_dir)
     for i in files :
         if i.endswith('.doc') or i.endswith('.docx') and i in list_diffs:
+            print(i)
             Document_to_pdf(i)
 
 

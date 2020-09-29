@@ -29,11 +29,12 @@ def pdf_documents(arguments):
             document_list.append(i)
 
 
-    if len(files.files)!=len(document_list):                                                    #save again the curent list of files 
+    if set(files.files)!=set(document_list):                                                    #save again the curent list of files 
         pd.DataFrame({'files':document_list}).to_csv(arguments["file_tracker"][0])
 
     document_init_list = files.files.values.tolist()
     document_lists = [document_list,document_init_list]
+
     return document_lists
 
 def doc_documents(arguments):
@@ -51,4 +52,5 @@ def doc_documents(arguments):
 
     documents_init_list = doc_files.files.values.tolist()
     documents_lists = [documents_list,documents_init_list]
+
     return documents_lists

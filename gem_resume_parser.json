@@ -1,33 +1,10 @@
 {
-    "Kritika_python": 
-        {
-            "Directory": "./drive_cli/Resumes",
-            "root": "../../",
-            "sheets": [
-                "MYDOC",
-                "Sheet23",
-                "sheet/sheet.csv"
-            ],
-            "drive_table": [
-                "pyresparser/Drive_Table/drive_table.csv",
-                "Drive_Table/drive_table.csv"
-            ],
-            "file_tracker": [
-                "pdf_file_tracker/pdf_file.csv",
-                "doc_file_tracker/doc_file.csv"
-            ],
-            "history": [
-                ".history",
-                ".drivecli"
-            ]
-        },
-
         "Kritika_PYTHON2":{
             "Directory": "./drive_cli/Python_Resumes",
             "root": "../../",
             "sheets": [
-                "MYDOC",
-                "Sheet24",
+                "Python_Resumes",
+                "Sheet2",
                 "sheet/sheet_python.csv"
             ],
             "drive_table": [
