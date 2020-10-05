@@ -81,6 +81,7 @@ class ResumeParser(object):
         name = utils.extract_name(self.__nlp, matcher=self.__matcher)
         email = utils.extract_email(self.__text)
         mobile = utils.extract_mobile_number(self.__text, self.__custom_regex)
+        print(mobile)
         experiences = utils.extracts_experience(self.__text)
         Degree = utils.extract_degree(self.__nlp,self.__noun_chunks)
         
@@ -135,10 +136,7 @@ class ResumeParser(object):
      
 
         # extract education Degree
-        try:
-            self.__details['Highest Qualification and passing year'] = cust_ent['Degree']
-        except KeyError:
-            self.__details['Highest Qualification and passing year'] = Degree
+        self.__details['Highest Qualification and passing year'] = Degree
             
             
 

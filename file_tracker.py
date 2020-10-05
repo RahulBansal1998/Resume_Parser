@@ -21,7 +21,7 @@ import pandas as pd
 
 def pdf_documents(arguments):
     ''' tracking pdf documents by using pdf_file.csv'''
-    files=pd.read_csv(arguments["file_tracker"][0])
+    files=pd.read_csv(arguments["file_trackerpdf"])
     list_of_files=os.listdir(arguments["Directory"])
     document_list = []
     for i in list_of_files:
@@ -30,7 +30,7 @@ def pdf_documents(arguments):
 
 
     if set(files.files)!=set(document_list):                                                    #save again the curent list of files 
-        pd.DataFrame({'files':document_list}).to_csv(arguments["file_tracker"][0])
+        pd.DataFrame({'files':document_list}).to_csv(arguments["file_trackerpdf"])
 
     document_init_list = files.files.values.tolist()
     document_lists = [document_list,document_init_list]
@@ -39,7 +39,7 @@ def pdf_documents(arguments):
 
 def doc_documents(arguments):
     ''' tracking doc_documents by using doc_file.csv'''
-    doc_files=pd.read_csv(arguments["file_tracker"][1])
+    doc_files=pd.read_csv(arguments["file_trackerdoc"])
     list_of_files=os.listdir(arguments["Directory"])
     documents_list = []
     for i in list_of_files:
@@ -48,7 +48,7 @@ def doc_documents(arguments):
 
 
     if len(doc_files.files)!=len(documents_list):                                   #save again the curent list of files 
-        pd.DataFrame({'files':documents_list}).to_csv(arguments["file_tracker"][1])
+        pd.DataFrame({'files':documents_list}).to_csv(arguments["file_trackerdoc"])
 
     documents_init_list = doc_files.files.values.tolist()
     documents_lists = [documents_list,documents_init_list]

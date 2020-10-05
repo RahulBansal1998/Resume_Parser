@@ -20,7 +20,7 @@ mime = MimeTypes()
 
 
 def get_history(arguments_data):
-    hist_path = os.path.join(dirpath, arguments_data["history"][0])
+    hist_path = os.path.join(dirpath, arguments_data["drivehistory"])
     if not os.path.isfile(hist_path):
         with open(hist_path, 'w')as outfile:
             history = {}
@@ -41,7 +41,7 @@ def save_history(info, arguments_data):
            "arg": info[1],
            "flags": info[0]
            }
-    hist_path = os.path.join(dirpath, arguments_data["history"][0])
+    hist_path = os.path.join(dirpath, arguments_data["drivehistory"])
     history = get_history(arguments_data)
     if not (date in history):
         history[date] = {}
@@ -60,7 +60,7 @@ def go_back(picker):
 
 
 def drive_data(arguments_data,*argv):
-    dclipath = os.path.join(dirpath, arguments_data["history"][1])
+    dclipath = os.path.join(dirpath, arguments_data["drivecommand"])
     if not os.path.isfile(dclipath):
         with open(dclipath, 'w')as outfile:
             if(not len(argv)):

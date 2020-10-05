@@ -289,7 +289,7 @@ def lists_out(arguments_data):
             for splitline in [line.split('|')] if len(splitline) > 1]
 
     os.chdir('../../pyresparser/')
-    with open(arguments_data["drive_table"][1], 'w') as f:
+    with open(arguments_data["drive_tablecsv"], 'w') as f:
         for d in data:
             f.write('{}\n'.format(','.join(d)))
 

@@ -33,7 +33,7 @@ def resume_link(filename,arguments_data):
     default_string = "https://drive.google.com/file/d/"
     doc_list = os.listdir(arguments_data["Directory"])
     actions.lists_out(arguments_data)
-    df = pd.read_csv(arguments_data["drive_table"][0])
+    df = pd.read_csv(arguments_data["drive_tablepyresparser"])
     id = df.loc[(df['Name'] == filename) | (df['Name'] == filename1) | (df['Name'] == filename2) ,'File ID'].values[0]
     file_link = default_string + id
     return file_link
@@ -191,6 +191,7 @@ def extract_entity_sections_grad(text):
         elif key and phrase.strip():
             entities[key].append(phrase)
 
+
     return entities
 
 
@@ -228,6 +229,7 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     entities =  {k: v.replace("of experience in development","") for k,v in entities.items()}   
     entities =  {k: v.lower() for k,v in entities.items()}    
     entities =  {k: v.capitalize() for k,v in entities.items()}
+
     return entities
 
 
@@ -277,6 +279,7 @@ def extract_email(text):
             email = email.lower()
             email = email.replace("email:","")
             email = email.replace("e-mail:","")
+            email = email.replace("e-mail-:","")
             email = email.replace("|mobile:","")
             email = email.replace("mobile:","")
 
@@ -305,6 +308,7 @@ def extract_name(nlp_text, matcher):
         if 'name' not in span.text.lower():
             name_string = str(span.text.lower())
             name_string = name_string.capitalize()
+            print('name',name_string)
             return name_string
 
 
@@ -315,18 +319,21 @@ def extract_mobile_number(text, custom_regex=None):
     :param text: plain text extracted from resume file
     :return: string of extracted mobile numbers
     '''
-
     mob_regex = r"\+?\d[\d -]{8,12}\d"
     if not custom_regex:
-        mob_num_regex = r'''(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)
-                        [-\.\s]*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})'''
-        phone = re.findall(re.compile(mob_num_regex), text)
-    else:
-        phone = re.findall(re.compile(custom_regex), text)
+            mob_num_regex = r'''(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)
+                            [-\.\s]*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})'''
+            phone = re.findall(re.compile(mob_num_regex), text)
+            phone = [i for i in phone if len(i)>9]
+            print("first",phone)
+
     if phone:
         number = ''.join(phone[0].split())
+        number = number[1:] if number.startswith('0') else number
+        print("number",number)
         if len(number) < 10:
             number = re.findall(re.compile(mob_regex),text)
+            number = [i for i in number if len(i)>9]
             number = ''.join(number[0].split())
         if len(number) > 10:
             number = number.replace("+","")
@@ -334,6 +341,8 @@ def extract_mobile_number(text, custom_regex=None):
             number = number.replace("+91-","")
             number = number.replace("91-","")
             number = number.replace("-","")
+
+        number = number.replace(",","")
         return number
 
 

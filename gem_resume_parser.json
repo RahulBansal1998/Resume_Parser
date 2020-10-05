@@ -1,24 +1,20 @@
 {
-        "Kritika_PYTHON2":{
-            "Directory": "./drive_cli/Python_Resumes",
+        "Kritika_RESUME":{
+            "Directory": "./drive_cli/Resumes",
             "root": "../../",
-            "sheets": [
-                "Python_Resumes",
-                "Sheet2",
-                "sheet/sheet_python.csv"
-            ],
-            "drive_table": [
-                "pyresparser/Drive_Table/drive_table_python.csv",
-                "Drive_Table/drive_table_python.csv"
-            ],
-            "file_tracker": [
-                "pdf_file_tracker/pdf_file_python.csv",
-                "doc_file_tracker/doc_file_python.csv"
-            ],
-            "history": [
-                ".pythonhistory",
-                ".pythondrivecli"
-            ]
+            "sheets_title": "Test_Resumes",
+            "sheets"  : "Sheet1",
+            "sheets_row" : "Python_Resume_Data/sheet_python.csv",
+
+            "drive_tablepyresparser": "pyresparser/Drive_Table/drive_table_python.csv",
+            "drive_tablecsv" :  "Drive_Table/drive_table_python.csv",
+            
+            "file_trackerdoc":  "Python_Resume_Data/doc_file_python.csv" ,
+            "file_trackerpdf":  "Python_Resume_Data/pdf_file_python.csv",
+            
+            "drivehistory": ".history",
+            "drivecommand": ".drivecli"
+            
         }
 
     
